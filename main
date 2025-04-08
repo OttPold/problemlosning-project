@@ -1,0 +1,197 @@
+import queue
+import math
+from typing import List, Dict, Optional
+
+# main.py: Slut project om träningslogg en applikation där 
+# användaren kan registrera sina träningspass, beräkna BMI, 
+# registrera dagligt kaloriintag och spåra kaloriförbrukning. 
+
+
+__author__  = "Ott Rudolf Pold"
+__version__ = "1.0.0"
+__email__   = "ott.pold@elev.ga.ntig.se"
+
+# innehåller allt info om användaren
+class User:
+    def __init__(self):
+        self.name = ""
+        self.gender = ""
+        self.age = 0
+        self.height = 0.0
+        self.weight = 0.0
+        self.bmi = 0.0
+    
+    # calculerar bmi och förkortar detta till en decimal tal
+    def calculate_bmi(self):
+        if self.height > 0: 
+            bmi = self.weight / (self.height**2)
+            self.bmi = math.floor(bmi * 10) / 10
+        else:
+            self.bmi = 0.0
+
+        return self.bmi
+    
+
+class Nutrition:
+    def __init__(self, user: User):
+        self.user = user
+        self.calorie_intake = 0
+        self.water_intake = 0.0
+        self.protein_intake = 0
+        self.meal_plan = queue.Queue()
+        self.nutrition_facts = {
+            "chicken": (165, 31),
+            "beef": (250, 26),
+            "eggs": (155, 13)
+        }
+    
+    def calculate_needs(self):
+        self.calorie_intake = 2000 if self.user.gender == "male" else 1800
+        self.protein_intake = self.user.weight * 0.8
+        self.water_intake = self.user.weight * 0.03
+
+class Exercise:
+    def __init__(self, name: str, calories: int):
+        self.name = name
+        self.calories = calories
+
+class Workout:
+    def __init__(self):
+        self.workouts = {
+            "beginner": {
+                "Push-ups": Exercise("Push-ups", 100),
+                "Squats": Exercise("Squats", 120)
+            },
+            "intermediate": {
+                "Pull-ups": Exercise("Pull-ups", 150),
+                "Deadlifts": Exercise("Deadlifts", 200)
+            }
+        }
+        self.workout_queue = queue.Queue()
+    
+    def add_exercise(self, level: str, name: str):
+        if level in self.workouts and name in self.workouts[level]:
+            self.workout_queue.put(self.workouts[level][name])
+            return True
+        return False
+
+def view_profile(user: User):
+    print(f"\nPROFILE")
+    print(f"Name: {user.name}")
+    print(f"Gender: {user.gender}")
+    print(f"Age: {user.age}")
+    print(f"Height: {user.height}m")
+    print(f"Weight: {user.weight}kg")
+    print(f"BMI: {user.bmi}")  
+    input("\nPress Enter to continue...")
+
+def update_profile(user: User, nutrition: Nutrition):
+
+    print("\nUPDATE PROFILE")
+    user.name = input(f"Name ({user.name}): ") or user.name
+    user.gender = input(f"Gender ({user.gender}): ") or user.gender
+    user.age = int(input(f"Age ({user.age}): ")) or user.age
+    user.height = float(input(f"Height ({user.height}m): ")) or user.height
+    user.weight = float(input(f"Weight ({user.weight}kg): ")) or user.weight
+    user.calculate_bmi()  
+    nutrition.calculate_needs()
+    print("\nProfile updated!")
+    time.sleep(1)
+
+def nutrition_menu(nutrition: Nutrition):
+    print(f"\nNUTRITION INFO")
+    print(f"Daily Calories: {nutrition.calorie_intake}")
+    print(f"Protein Needed: {nutrition.protein_intake}g")
+    print(f"Water Needed: {nutrition.water_intake:.1f}L")
+    input("\nPress Enter to continue...")
+
+def workout_menu(workout: Workout):
+    print("\nWORKOUT PLAN")
+    print("Available exercises:")
+    for level, exercises in workout.workouts.items():
+        print(f"\n{level.capitalize()}:")
+        for name in exercises:
+            print(f"- {name}")
+    
+    level = input("\nEnter your level (beginner/intermediate): ").lower()
+    exercise = input("Enter exercise name: ").capitalize()
+    
+    if workout.add_exercise(level, exercise):
+        print(f"\n{exercise} added to workout!")
+    else:
+        print("\nInvalid exercise or level")
+    time.sleep(1)
+
+def execute_workout(workout: Workout):
+    print("\nEXECUTING WORKOUT")
+    if workout.workout_queue.empty():
+        print("No exercises in your workout plan!")
+        input("\nPress Enter to continue...")
+        return
+    
+    total_calories = 0
+    while not workout.workout_queue.empty():
+        exercise = workout.workout_queue.get()
+        print(f"\nDoing: {exercise.name}")
+        print(f"Calories: {exercise.calories}")
+        total_calories += exercise.calories
+        input("Press Enter when done...")
+    
+    print(f"\nWORKOUT COMPLETE!")
+    print(f"Total calories burned: {total_calories}")
+    input("\nPress Enter to continue...")
+
+def main_menu(user: User, nutrition: Nutrition, workout: Workout):
+    while True:
+        print("\n" + "="*20)
+        print("FITNESS TRACKER")
+        print("="*20)
+        print("1. View Profile")
+        print("2. Update Profile")
+        print("3. Nutrition Info")
+        print("4. Workout Plan")
+        print("5. Execute Workout")
+        print("0. Exit")
+        
+        choice = input("\nSelect option: ")
+        
+        if choice == "1":
+            view_profile(user)
+        elif choice == "2":
+            update_profile(user, nutrition)
+        elif choice == "3":
+            nutrition_menu(nutrition)
+        elif choice == "4":
+            workout_menu(workout)
+        elif choice == "5":
+            execute_workout(workout)
+        elif choice == "0":
+            print("\nExiting program...")
+            break
+        else:
+            print("\nInvalid choice, please try again")
+            time.sleep(1)
+
+def main():
+    user = User()
+    nutrition = Nutrition(user)
+    workout = Workout()
+    
+    print("\n" + "="*20)
+    print("FITNESS TRACKER SETUP")
+    print("="*20)
+    user.name = input("\nEnter your name: ")
+    user.gender = input("Gender (male/female): ").lower()
+    user.age = int(input("Age: "))
+    user.height = float(input("Height (m): "))
+    user.weight = float(input("Weight (kg): "))
+    user.calculate_bmi()  
+    nutrition.calculate_needs()
+    
+    print("\nSetup complete!")
+    time.sleep(1)
+    main_menu(user, nutrition, workout)
+
+if __name__ == "__main__":
+    import time
+    main()
