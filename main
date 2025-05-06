@@ -1,4 +1,9 @@
 import queue
+import sys
+import os
+from enum import Enum
+import time
+import queue
 import math
 from typing import List, Dict, Optional
 
@@ -8,7 +13,7 @@ from typing import List, Dict, Optional
 
 
 __author__  = "Ott Rudolf Pold"
-__version__ = "1.0.0"
+__version__ = "3.0.0"
 __email__   = "ott.pold@elev.ga.ntig.se"
 
 # innehåller allt info om användaren
@@ -20,6 +25,31 @@ class User:
         self.height = 0.0
         self.weight = 0.0
         self.bmi = 0.0
+        self.user_information = []
+
+    def set_name(self):
+        self.name = input("-Enter your First Name: ")
+        self.user_information.append(f"Your name is: {self.name}")
+
+    def set_gender(self):
+        self.gender = input("\n-Enter your Gender (male/female): ").lower()
+        while self.gender not in ["male", "female"]:
+            print("\033[31mX Invalid Gender X\nPlease re-enter gender:\033[0m", end=" ")
+            self.gender = input().lower()
+        self.user_information.append(f"Your gender is: {self.gender}")
+    
+    def set_age(self):
+        self.age = int(input("\n-Enter your Age: "))
+        self.user_information.append(f"Your age is: {self.age} years old")
+    
+    def set_height(self):
+        self.height = float(input("\n-Enter your Height (meters): "))
+        self.user_information.append(f"Your height is: {self.height} m")
+    
+    def set_weight(self):
+        self.weight = float(input("\n-Enter your Weight (kg): "))
+        self.user_information.append(f"Your Weight is: {self.weight} Kg")
+    
     
     # calculerar bmi och förkortar detta till en decimal tal
     def calculate_bmi(self):
@@ -28,8 +58,61 @@ class User:
             self.bmi = math.floor(bmi * 10) / 10
         else:
             self.bmi = 0.0
-
         return self.bmi
+
+
+    def update_name(self):
+        old_name = self.name
+        self.name = input("Enter your name: ")
+        for i, info in enumerate(self.user_information):
+            if info == f"Your name is: {old_name}":
+                self.user_information[i] = f"Your name is: {self.name}"
+                break
+    
+    def update_weight(self):
+        old_weight = self.weight
+        self.weight = float(input("Enter your Weight (Kg): "))
+        for i, info in enumerate(self.user_information):
+            if info == f"Your Weight is: {old_weight} Kg":
+                self.user_information[i] = f"Your Weight is: {self.weight} Kg"
+                break
+        self.calculate_bmi()
+    
+    def update_height(self):
+        old_height = self.height
+        self.height = float(input("Enter your Height (meters): "))
+        for i, info in enumerate(self.user_information):
+            if info == f"Your height is: {old_height} m":
+                self.user_information[i] = f"Your height is: {self.height} m"
+                break
+        self.calculate_bmi()
+    
+    def update_age(self):
+        old_age = self.age
+        self.age = int(input("Enter Your Age: "))
+        for i, info in enumerate(self.user_information):
+            if info == f"Your age is: {old_age} years old":
+                self.user_information[i] = f"Your age is: {self.age} years old"
+                break
+        self.calculate_bmi()
+    
+    def update_gender(self):
+        old_gender = self.gender
+        self.gender = input("Enter Your Gender (male/female): ").lower()
+        while self.gender not in ["male", "female"]:
+            print("\033[31mX Invalid Gender X\nPlease re-enter gender:\033[0m", end=" ")
+            self.gender = input().lower()
+        for i, info in enumerate(self.user_information):
+            if info == f"Your gender is: {old_gender}":
+                self.user_information[i] = f"Your gender is: {self.gender}"
+                break
+    
+    def display_profile(self):
+        print(f"\033[34;47m> {self.name}'s Profile\033[0m\n")
+        for info in self.user_information:
+            print(f"-{info}")    
+
+    
     
 
 class Nutrition:
@@ -38,160 +121,315 @@ class Nutrition:
         self.calorie_intake = 0
         self.water_intake = 0.0
         self.protein_intake = 0
+        self.hours_slept = 0
         self.meal_plan = queue.Queue()
         self.nutrition_facts = {
             "chicken": (165, 31),
             "beef": (250, 26),
             "eggs": (155, 13)
         }
+    def add_meals(self, name: str, calories: int, protein: int):
+        self.nutrition_facts[name] = (calories, protein)
+
+    def set_calorie_intake():
+        return
     
-    def calculate_needs(self):
-        self.calorie_intake = 2000 if self.user.gender == "male" else 1800
-        self.protein_intake = self.user.weight * 0.8
-        self.water_intake = self.user.weight * 0.03
+    def set_water_intake():
+        return
+    
+    def set_protein_intake():
+        return
+    
+    def set_remaining_cnp():
+        return
+    
+    def set_hours_slept():
+        return
+    
+    def add_to_meal_plan():
+        return
+    
+    def remove_from_meal_plan():
+        return
+    
+    def print_meals():
+        return
+    
+    def print_meal_plan():
+        return
+    
+    def clear():
+        return
+    
+    def access_front_element():
+        return
+    
+    def set_burned_calories():
+        return
 
 class Exercise:
-    def __init__(self, name: str, calories: int):
+    def __init__(self, name: str, muscle_group: str, calories_burn: int, sets: int, reps: int):
         self.name = name
-        self.calories = calories
+        self.muscle_group = muscle_group
+        self.calories_burn = calories_burn
+        self.sets = sets
+        self.reps = reps
+
+class WorkoutRoutine:
+    def __init__(self):
+        self.exercises = []
+
+class FitnessGoal(Enum):
+    STRENGTH = "strength"
+    VOLUME = "volume"
+    ENDURANCE = "endurance"
+
+class StrengthLevel(Enum):
+    BEGINNER = "beginner"
+    INTERMEDIATE = "intermediate"
+    ADVANCED = "advanced"
 
 class Workout:
     def __init__(self):
-        self.workouts = {
-            "beginner": {
-                "Push-ups": Exercise("Push-ups", 100),
-                "Squats": Exercise("Squats", 120)
+        self.beginner_workouts = {}
+        self.intermediate_workouts = {}
+        self.advanced_workouts = {}
+        self.workout_queue = queue.Queue()
+        self.user_fitness_goal = None
+        self.user_strength_level = None
+
+        self.predefine_workouts()
+    
+    def predefine_workouts(self):
+
+        #Nybörjare
+        self.beginner_workouts = {
+            "strength": {
+                "chest": [
+                    Exercise("Traditional Push-up", "chest", 100, 3, 8)
+                ]
             },
-            "intermediate": {
-                "Pull-ups": Exercise("Pull-ups", 150),
-                "Deadlifts": Exercise("Deadlifts", 200)
+            "volume": {
+                "chest": [
+                    Exercise("Traditional Push-up", "chest", 100, 4, 10)
+                ]
+            },
+            "endurance": {
+                "chest": [
+                    Exercise("Traditional Push-up", "chest", 110, 3, 12)
+                ]
             }
         }
-        self.workout_queue = queue.Queue()
-    
-    def add_exercise(self, level: str, name: str):
-        if level in self.workouts and name in self.workouts[level]:
-            self.workout_queue.put(self.workouts[level][name])
-            return True
-        return False
 
-def view_profile(user: User):
-    print(f"\nPROFILE")
-    print(f"Name: {user.name}")
-    print(f"Gender: {user.gender}")
-    print(f"Age: {user.age}")
-    print(f"Height: {user.height}m")
-    print(f"Weight: {user.weight}kg")
-    print(f"BMI: {user.bmi}")  
-    input("\nPress Enter to continue...")
+        #Intermediate
+        self.intermediate_workouts
 
-def update_profile(user: User, nutrition: Nutrition):
+        #Expert
+        self.advanced_workouts
 
-    print("\nUPDATE PROFILE")
-    user.name = input(f"Name ({user.name}): ") or user.name
-    user.gender = input(f"Gender ({user.gender}): ") or user.gender
-    user.age = int(input(f"Age ({user.age}): ")) or user.age
-    user.height = float(input(f"Height ({user.height}m): ")) or user.height
-    user.weight = float(input(f"Weight ({user.weight}kg): ")) or user.weight
-    user.calculate_bmi()  
-    nutrition.calculate_needs()
-    print("\nProfile updated!")
-    time.sleep(1)
-
-def nutrition_menu(nutrition: Nutrition):
-    print(f"\nNUTRITION INFO")
-    print(f"Daily Calories: {nutrition.calorie_intake}")
-    print(f"Protein Needed: {nutrition.protein_intake}g")
-    print(f"Water Needed: {nutrition.water_intake:.1f}L")
-    input("\nPress Enter to continue...")
-
-def workout_menu(workout: Workout):
-    print("\nWORKOUT PLAN")
-    print("Available exercises:")
-    for level, exercises in workout.workouts.items():
-        print(f"\n{level.capitalize()}:")
-        for name in exercises:
-            print(f"- {name}")
-    
-    level = input("\nEnter your level (beginner/intermediate): ").lower()
-    exercise = input("Enter exercise name: ").capitalize()
-    
-    if workout.add_exercise(level, exercise):
-        print(f"\n{exercise} added to workout!")
-    else:
-        print("\nInvalid exercise or level")
-    time.sleep(1)
-
-def execute_workout(workout: Workout):
-    print("\nEXECUTING WORKOUT")
-    if workout.workout_queue.empty():
-        print("No exercises in your workout plan!")
-        input("\nPress Enter to continue...")
+    def set_user_fitness_goal():
         return
     
-    total_calories = 0
-    while not workout.workout_queue.empty():
-        exercise = workout.workout_queue.get()
-        print(f"\nDoing: {exercise.name}")
-        print(f"Calories: {exercise.calories}")
-        total_calories += exercise.calories
-        input("Press Enter when done...")
+    def set_user_strength_level():
+        return
     
-    print(f"\nWORKOUT COMPLETE!")
-    print(f"Total calories burned: {total_calories}")
-    input("\nPress Enter to continue...")
+    def get_exercises():
+        return
+    
+    def select_and_queue_exercises():
+        return
+    
+    def add_gym_activity_to_queue():
+        return
+    
+    def execute_workout_queue():
+        return
+    
+    def calculate_calories():
+        return
+    
+    def update_calorie_intake_non_gym():
+        return
+    
+    def calculate_total_calories_burned_gym():
+        return
+    
 
-def main_menu(user: User, nutrition: Nutrition, workout: Workout):
+
+
+def update_profile_menu(user: User, nutrition: Nutrition):
+
     while True:
-        print("\n" + "="*20)
-        print("FITNESS TRACKER")
-        print("="*20)
-        print("1. View Profile")
-        print("2. Update Profile")
-        print("3. Nutrition Info")
-        print("4. Workout Plan")
-        print("5. Execute Workout")
-        print("0. Exit")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\033[30;43mFITNESS TRACKER\033[1;0m")
+        print("\033[34;47m> Update Profile\033[1;0m\n")
+        print("\033[33mChoose what you want to update:\033[1;0m")
+        print("1. Update Name")
+        print("2. Update Weight")
+        print("3. Update Height")
+        print("4. Update Age")
+        print("5. Update Gender")
+        print("0. \033[31mGo Back\033[0m\n")
+        print("--> ", end="")
         
-        choice = input("\nSelect option: ")
+        try:
+            choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            continue
         
-        if choice == "1":
-            view_profile(user)
-        elif choice == "2":
-            update_profile(user, nutrition)
-        elif choice == "3":
-            nutrition_menu(nutrition)
-        elif choice == "4":
-            workout_menu(workout)
-        elif choice == "5":
-            execute_workout(workout)
-        elif choice == "0":
-            print("\nExiting program...")
-            break
-        else:
-            print("\nInvalid choice, please try again")
+        if choice == 1:
+            print("Enter your name: ", end="")
+            user.update_name()
+            print("\033[32mName Successfully Updated!\033[0m")
             time.sleep(1)
+        
+        elif choice == 2:
+            print("Enter your Weight \033[33m(Kg)\033[0m: ", end="")
+            user.update_weight()
+            print("\033[32mWeight Successfully Updated!\033[0m")
+            time.sleep(1)
+        
+        elif choice == 3:
+            print("Enter your Height \033[33m(meters)\033[0m: ", end="")
+            user.update_height()
+            print("\033[32mHeight Successfully Updated!\033[0m")
+            time.sleep(1)
+        
+        elif choice == 4:
+            print("Enter Your Age: ", end="")
+            user.update_age()
+            print("\033[32mAge Successfully Updated!\033[0m")
+            time.sleep(1)
+        
+        elif choice == 5:
+            print("Enter Your Gender \033[33m(male/female)\033[0m: ", end="")
+            user.update_gender()
+            print("\033[32mGender Successfully Updated!\033[0m")
+            time.sleep(1)
+        
+        elif choice == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+
+def nutrition_help_menu():
+    return
+
+def meal_plan_menu():
+    return
+
+def what_you_ate_menu():
+    return
+
+def workout_plan_menu():
+    return
+
+def walking_menu():
+    return
+
+def running_menu():
+    return
+
+def swimming_menu():
+    return
+
+def cycling_menu():
+    return
+
+def gym_training_menu():
+    return
 
 def main():
     user = User()
     nutrition = Nutrition(user)
     workout = Workout()
     
-    print("\n" + "="*20)
-    print("FITNESS TRACKER SETUP")
-    print("="*20)
-    user.name = input("\nEnter your name: ")
-    user.gender = input("Gender (male/female): ").lower()
-    user.age = int(input("Age: "))
-    user.height = float(input("Height (m): "))
-    user.weight = float(input("Weight (kg): "))
-    user.calculate_bmi()  
-    nutrition.calculate_needs()
+    # Welcome msg
+    print("\033[32mWELCOME to your fitness journey!")
+    print("Please enter the below information for us to help you get started!\033[0m\n")
     
-    print("\nSetup complete!")
-    time.sleep(1)
-    main_menu(user, nutrition, workout)
+    # Register användare
+    user.set_name()
+    user.set_gender()
+    user.set_age()
+    user.set_height()
+    user.set_weight()
+    user.calculate_bmi()
+
+    # nutrition info
+    nutrition.set_calorie_intake()
+    nutrition.set_protein_intake()
+    nutrition.set_water_intake()
+    
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+        
+    while True:
+        print("\033[30;43mFITNESS TRACKER\033[1;0m\n")
+        print("\033[33mChoose what you want to do:(enter the number)\033[1;0m")
+        print("1. Display Profile")
+        print("2. Update Profile")
+        print("3. Get Nutrition Help")
+        print("4. Get a Workout Plan")
+        print("5. Execute Workout")
+        print("0. \033[31mExit program\033[0m\n")
+        print("--> ", end="")
+        
+        try:
+            choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            continue
+        
+        if choice == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            User.display_profile()
+            print("\n\033[33m>>> Press 0 to Continue:\033[0m ", end="")
+            input()
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 2:
+            update_profile_menu(user, nutrition)
+        
+        elif choice == 3:
+            nutrition_help_menu(user, nutrition)
+        
+        elif choice == 4:
+            workout_plan_menu(user, workout)
+        
+        elif choice == 5:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m>> WORKOUT EXECUTION\033[1;0m\n")
+            
+            calories_burned = workout.calculate_total_calories_burned_gym()
+            nutrition.set_burned_calories(calories_burned)
+            
+            workout.execute_workout_queue()
+        
+        elif choice == 0:
+            print("\n\033[32mTHANK YOU for using Fitness Tracker.\033[0m")
+            print("\033[31mExiting...\033[0m")
+            time.sleep(4)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
 
 if __name__ == "__main__":
-    import time
     main()
