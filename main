@@ -13,46 +13,44 @@ from typing import List, Dict, Optional
 
 
 __author__  = "Ott Rudolf Pold"
-__version__ = "3.0.0"
+__version__ = "4.0.0"
 __email__   = "ott.pold@elev.ga.ntig.se"
 
 # innehåller allt info om användaren
 class User:
-    def __init__(self):
+    def __init__(self): # Initierar användarattribut
         self.name = ""
         self.gender = ""
         self.age = 0
         self.height = 0.0
         self.weight = 0.0
         self.bmi = 0.0
-        self.user_information = []
+        self.user_information = [] # Lista för att lagra användarinformation
 
-    def set_name(self):
+    def set_name(self): # Sätter användarens namn
         self.name = input("-Enter your First Name: ")
         self.user_information.append(f"Your name is: {self.name}")
 
-    def set_gender(self):
+    def set_gender(self): # Sätter kön
         self.gender = input("\n-Enter your Gender (male/female): ").lower()
         while self.gender not in ["male", "female"]:
             print("\033[31mX Invalid Gender X\nPlease re-enter gender:\033[0m", end=" ")
             self.gender = input().lower()
         self.user_information.append(f"Your gender is: {self.gender}")
     
-    def set_age(self):
+    def set_age(self): # Sätter ålder
         self.age = int(input("\n-Enter your Age: "))
         self.user_information.append(f"Your age is: {self.age} years old")
     
-    def set_height(self):
+    def set_height(self): # Sätter längd
         self.height = float(input("\n-Enter your Height (meters): "))
         self.user_information.append(f"Your height is: {self.height} m")
     
-    def set_weight(self):
+    def set_weight(self): # Sätter vikt
         self.weight = float(input("\n-Enter your Weight (kg): "))
         self.user_information.append(f"Your Weight is: {self.weight} Kg")
     
-    
-    # calculerar bmi och förkortar detta till en decimal tal
-    def calculate_bmi(self):
+    def calculate_bmi(self): # calculerar bmi och förkortar detta till en decimal tal
         if self.height > 0: 
             bmi = self.weight / (self.height**2)
             self.bmi = math.floor(bmi * 10) / 10
@@ -60,8 +58,7 @@ class User:
             self.bmi = 0.0
         return self.bmi
 
-
-    def update_name(self):
+    def update_name(self): # uppdaterar namn
         old_name = self.name
         self.name = input("Enter your name: ")
         for i, info in enumerate(self.user_information):
@@ -69,7 +66,7 @@ class User:
                 self.user_information[i] = f"Your name is: {self.name}"
                 break
     
-    def update_weight(self):
+    def update_weight(self): # uppdaterar vikt
         old_weight = self.weight
         self.weight = float(input("Enter your Weight (Kg): "))
         for i, info in enumerate(self.user_information):
@@ -78,7 +75,7 @@ class User:
                 break
         self.calculate_bmi()
     
-    def update_height(self):
+    def update_height(self): # uppdaterar längd
         old_height = self.height
         self.height = float(input("Enter your Height (meters): "))
         for i, info in enumerate(self.user_information):
@@ -87,7 +84,7 @@ class User:
                 break
         self.calculate_bmi()
     
-    def update_age(self):
+    def update_age(self): # uppdaterar ålder
         old_age = self.age
         self.age = int(input("Enter Your Age: "))
         for i, info in enumerate(self.user_information):
@@ -96,7 +93,7 @@ class User:
                 break
         self.calculate_bmi()
     
-    def update_gender(self):
+    def update_gender(self): # uppdaterar kön
         old_gender = self.gender
         self.gender = input("Enter Your Gender (male/female): ").lower()
         while self.gender not in ["male", "female"]:
@@ -107,100 +104,218 @@ class User:
                 self.user_information[i] = f"Your gender is: {self.gender}"
                 break
     
-    def display_profile(self):
+    def display_profile(self): # Visar användarens profil
         print(f"\033[34;47m> {self.name}'s Profile\033[0m\n")
         for info in self.user_information:
             print(f"-{info}")    
 
-    
-    
 
 class Nutrition:
-    def __init__(self, user: User):
+    def __init__(self, user: User): # Initierar näringsattribut
         self.user = user
         self.calorie_intake = 0
         self.water_intake = 0.0
         self.protein_intake = 0
         self.hours_slept = 0
-        self.meal_plan = queue.Queue()
-        self.nutrition_facts = {
+        self.meal_plan = queue.Queue() # Kö för måltidsplan
+        self.nutrition_facts = { # Dictionary för matvaror och deras näringsvärden
             "chicken": (165, 31),
             "beef": (250, 26),
             "eggs": (155, 13)
         }
-    def add_meals(self, name: str, calories: int, protein: int):
+
+    def add_meals(self, name: str, calories: int, protein: int): # Lägger till måltider
         self.nutrition_facts[name] = (calories, protein)
 
-    def set_calorie_intake():
-        return
+    def set_calorie_intake(self): # Beräknar kaloriintag baserat på kön, ålder och BMI
+        gender = self.person.gender
+        age = self.person.age
+        bmi = self.person.bmi
+        
+        if gender == "male": # Beräkning för män
+            if 9 <= age <= 13:
+                if bmi < 18.5:   # undervikt
+                    self.calorie_intake = 2000
+                elif 18.5 <= bmi <= 24.9:   # normalvikt
+                    self.calorie_intake = 1800
+                elif 25 <= bmi <= 29.9:   # övervikt
+                    self.calorie_intake = 1600
+                elif bmi >= 30:   # fetma
+                    self.calorie_intake = 1500
+            elif 14 <= age <= 18:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2500
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 2200
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 1800
+                elif bmi >= 30: # fetma
+                    self.calorie_intake = 1600
+            elif 19 <= age <= 30:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2600
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 2200
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 2000
+                elif bmi >= 30: # fetma
+                    self.calorie_intake = 1800
+            elif 31 <= age <= 50:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2200
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 2000
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 1800
+                elif bmi >= 30: # fetma
+                    self.calorie_intake = 1700
+            elif age >= 51:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2200
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 2000
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 2000
+                elif bmi >= 30: # fetma
+                    self.calorie_intake = 1800
+        elif gender == "female": # Beräkning för kvinna
+            if 9 <= age <= 13:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 1700
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 1500
+                elif bmi >= 25: # övervikt
+                    self.calorie_intake = 1400
+            elif 14 <= age <= 18: 
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2100
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 1900
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 1800
+                elif bmi >= 30:  # fetma
+                    self.calorie_intake = 1600
+            elif 19 <= age <= 30:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2200
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 2000
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 1800
+                elif bmi >= 30:  # fetma
+                    self.calorie_intake = 1700
+            elif 31 <= age <= 50:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 2000
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 1800
+                elif bmi >= 25: # övervikt
+                    self.calorie_intake = 1700 
+            elif age >= 51:
+                if bmi < 18.5: # undervikt
+                    self.calorie_intake = 1900
+                elif 18.5 <= bmi <= 24.9: # normalvikt
+                    self.calorie_intake = 1800
+                elif 25 <= bmi <= 29.9: # övervikt
+                    self.calorie_intake = 1600
+                elif bmi >= 30:  # fetma
+                    self.calorie_intake = 1400
     
-    def set_water_intake():
-        return
+    def set_water_intake(self): # Beräknar vattenintag (1kg = 2.205 pounds och 1 oz = 0.0295735296 liter)
+        self.water_intake = (self.person.weight * 2.205) * 0.0295735296
     
-    def set_protein_intake():
-        return
+    def set_protein_intake(self): # Beräknar proteinintag
+        self.protein_intake = self.person.weight * 0.8
     
-    def set_remaining_cnp():
-        return
+    def set_remaining_cnp(self, food_name: str): # uppdaterar återstående kalorier och protein
+        if food_name in self.nutrition_facts:
+            calories, protein = self.nutrition_facts[food_name]
+            self.calorie_intake -= calories
+            self.protein_intake -= protein
     
-    def set_hours_slept():
-        return
+    def set_hours_slept(self, hours: int): # Sätter sov timar
+        self.hours_slept = hours
     
-    def add_to_meal_plan():
-        return
+    def add_to_meal_plan(self, food_name: str): # Lägger till måltid i måltidsplanen
+        if food_name in self.nutrition_facts:
+            self.meal_plan.put(food_name)
     
-    def remove_from_meal_plan():
-        return
+    def remove_from_meal_plan(self): # Tar bort måltid från måltidsplanen
+        if not self.meal_plan.empty():
+            self.meal_plan.get()
     
-    def print_meals():
-        return
+    def print_meals(self):  # Skriver ut alla tillgängliga måltider
+        for i, (food, (calories, protein)) in enumerate(self.nutrition_facts.items(), 1):
+            print(f"{i}. {food}: {calories} Calories {protein} g of Protein")
     
-    def print_meal_plan():
-        return
+    def print_meal_plan(self): # Skriver ut måltidsplanen
+        temp_queue = queue.Queue()
+        counter = 1
+        
+        while not self.meal_plan.empty():
+            item = self.meal_plan.get()
+            print(f"{counter}. {item}")
+            temp_queue.put(item)
+            counter += 1
+        
+        # Återställer måltidsplanen
+        while not temp_queue.empty():
+            self.meal_plan.put(temp_queue.get())
     
-    def clear():
-        return
+    def clear(self): # Rensar måltidsplanen och återställa näringsvärden
+        while not self.meal_plan.empty():
+            self.meal_plan.get()
+        self.set_calorie_intake()
+        self.set_protein_intake()
+        self.set_water_intake()
     
-    def access_front_element():
-        return
+    def access_front_element(self) -> Optional[str]: # Hämtar första elementet i måltidsplanen
+        if not self.meal_plan.empty():
+            return self.meal_plan.queue[0]
+        return None
     
-    def set_burned_calories():
-        return
+    def set_burned_calories(self, calories_burned: float): # Justerar kaloriintag efter förbrända kalorier
+        self.calorie_intake += calories_burned
 
-class Exercise:
+
+class Exercise: # Klass för att representera övningar
     def __init__(self, name: str, muscle_group: str, calories_burn: int, sets: int, reps: int):
-        self.name = name
-        self.muscle_group = muscle_group
-        self.calories_burn = calories_burn
-        self.sets = sets
-        self.reps = reps
+        self.name = name # Övningens namn
+        self.muscle_group = muscle_group # Muskelgrupp
+        self.calories_burn = calories_burn # Kaloriförbrukning
+        self.sets = sets # Antal set
+        self.reps = reps # Antal repetitioner
+ 
 
-class WorkoutRoutine:
+class WorkoutRoutine: # Klass för att representera träningspass
     def __init__(self):
-        self.exercises = []
+        self.exercises = [] # Lista över övningar
 
-class FitnessGoal(Enum):
+
+class FitnessGoal(Enum): # Enum för träningsmål
     STRENGTH = "strength"
     VOLUME = "volume"
     ENDURANCE = "endurance"
 
-class StrengthLevel(Enum):
+
+class StrengthLevel(Enum): # Enum för styrkenivå
     BEGINNER = "beginner"
     INTERMEDIATE = "intermediate"
     ADVANCED = "advanced"
 
-class Workout:
-    def __init__(self):
-        self.beginner_workouts = {}
-        self.intermediate_workouts = {}
-        self.advanced_workouts = {}
-        self.workout_queue = queue.Queue()
-        self.user_fitness_goal = None
-        self.user_strength_level = None
 
-        self.predefine_workouts()
+class Workout: # Huvudklass för träningsfunktionalitet
+    def __init__(self):
+        self.beginner_workouts = {} # Övningar för nybörjare
+        self.intermediate_workouts = {}  # Övningar för medelnivå
+        self.advanced_workouts = {} # Övningar för avancerade
+        self.workout_queue = queue.Queue() # Kö för träningspass
+        self.user_fitness_goal = None # Användarens träningsmål
+        self.user_strength_level = None # Användarens styrkenivå
+
+        self.predefine_workouts() # Skapa fördefinierade övningar
     
-    def predefine_workouts(self):
+    def predefine_workouts(self): # Fördefinierade övningar för olika nivåer och mål
 
         #Nybörjare
         self.beginner_workouts = {
@@ -227,7 +342,7 @@ class Workout:
         #Expert
         self.advanced_workouts
 
-    def set_user_fitness_goal():
+    def set_user_fitness_goal(): 
         return
     
     def set_user_strength_level():
@@ -254,7 +369,6 @@ class Workout:
     def calculate_total_calories_burned_gym():
         return
     
-
 
 
 def update_profile_menu(user: User, nutrition: Nutrition):
@@ -319,39 +433,299 @@ def update_profile_menu(user: User, nutrition: Nutrition):
             print("\033[31mPlease Try Again\033[1;0m")
             time.sleep(2)
 
-def nutrition_help_menu():
+def nutrition_help_menu(user: User, nutrition: Nutrition):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\033[30;43mFITNESS TRACKER\033[1;0m")
+        print("\033[34;47m> Nutrition Help\033[1;0m\n")
+        print("\033[33mChoose one of the following operations:\033[0m")
+        print("1. Calorie Intake")
+        print("2. Protein Intake")
+        print("3. Sleeping Hours")
+        print("4. Meal Plan")
+        print("5. New Day")
+        print("0. \033[31mGo Back\033[0m\n")
+        print("--> ", end="")
+        
+        try:
+            choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            continue
+        
+        if choice == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Calorie Intake\033[1;0m\n")
+            print(f"You should consume {nutrition.calorie_intake} more calories today\n")
+            time.sleep(3)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Protein Intake\033[1;0m\n")
+            print(f"You should consume {nutrition.protein_intake} more grams of protein today\n")
+            time.sleep(3)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Sleeping Hours\033[1;0m\n")
+            
+            recommended_hours = 9
+            hours_slept = 0
+            
+            print("It is recommended to sleep 9 hours per day.")
+            print("\033[33mHow many hours did you sleep?\033[0m\n--> ", end="")
+            
+            try:
+                hours_slept = int(input())
+            except ValueError:
+                print("\033[31mPlease enter a valid number.\033[0m")
+                time.sleep(2)
+                continue
+            
+            nutrition.set_hours_slept(hours_slept)
+            
+            if nutrition.hours_slept != recommended_hours and nutrition.hours_slept < recommended_hours:
+                print(f"\033[31m{user.name}! You don't sleep enough!")
+                print(f"You need to sleep {recommended_hours - nutrition.hours_slept} more hours.\033[0m")
+            elif nutrition.hours_slept != recommended_hours and nutrition.hours_slept > recommended_hours:
+                print(f"\033[31m{user.name}! Don't be lazy! You sleep a lot!")
+                print(f"You need to sleep {nutrition.hours_slept - recommended_hours} less hours.\033[0m")
+            elif nutrition.hours_slept == recommended_hours:
+                print(f"\033[32mGood Job {user.name}! Your sleep schedule is perfect, keep it up!\033[0m")
+            
+            time.sleep(5)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 4:
+            meal_plan_menu(user, nutrition)
+        
+        elif choice == 5:
+            print("\33[31mWarning! The meal plan will be deleted and set empty!!")
+            print("Are you sure you want to continue? \33[33m(y/n) \33[0m", end="")
+            
+            yn = input().lower()
+            if yn == 'y':
+                nutrition.clear()
+            elif yn == 'n':
+                os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+
+def meal_plan_menu(user: User, nutrition: Nutrition):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\033[30;43mFITNESS TRACKER\033[1;0m")
+        print("\033[34;47m> Nutrition Help\033[1;0m")
+        print("\033[34;47m>> Meal Plan\033[1;0m\n")
+        print("\033[33mChoose one of the following operations:\033[0m")
+        print("1. Show all available meals in the system")
+        print("2. Add Meal to system")
+        print("3. Create Meal Plan")
+        print("4. Show Meal plan for the day")
+        print("5. Enter what you ate today")
+        print("0. \033[31mGo Back\033[0m\n")
+        print("--> ", end="")
+        
+        try:
+            choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            continue
+        
+        if choice == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Meal Plan\033[1;0m")
+            print("\033[34;47m>>> Available Meals\033[1;0m\n")
+            nutrition.print_meals()
+            print("\033[33mPress 0 to go back: \033[0m", end="")
+            while True:
+                try:
+                    if int(input()) == 0:
+                        break
+                except ValueError:
+                    continue
+        
+        elif choice == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Meal Plan\033[1;0m")
+            print("\033[34;47m>>> Add Meal\033[1;0m\n")
+            
+            name = input("-Enter Name of the Meal: ")
+            calories = int(input("\n-Enter Amount of calories per 100g: "))
+            protein = int(input("\n-Enter Amount of Protein per 100g: "))
+            
+            nutrition.add_meals(name, calories, protein)
+            print("Added")
+            time.sleep(1)
+        
+        elif choice == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Meal Plan\033[1;0m")
+            print("\033[34;47m>>> Create Meal Plan\033[1;0m\n")
+            
+            while True:
+                print("\033[31mRemember to enter the meals in order of what you will eat first then last\033[0m")
+                print("-Choose from the following: ")
+                nutrition.print_meals()
+                print("-\033[33mEnter the exact Name of the food you want to add to the meal plan: \033[0m", end="")
+                food_name = input()
+                
+                nutrition.add_to_meal_plan(food_name)
+                print("-Press 0 to go back, or 1 to add another meal: ", end="")
+                
+                try:
+                    cont = int(input())
+                    if cont == 0:
+                        break
+                except ValueError:
+                    continue
+        
+        elif choice == 4:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Meal Plan\033[1;0m")
+            print("\033[34;47m>>> Meal Plan For The Day\033[1;0m\n")
+            nutrition.print_meal_plan()
+            print("-Enter 0 to go back: ", end="")
+            while True:
+                try:
+                    if int(input()) == 0:
+                        os.system('cls' if os.name == 'nt' else 'clear')
+                        break
+                except ValueError:
+                    continue
+        
+        elif choice == 5:
+            what_you_ate_menu(user, nutrition)
+        
+        elif choice == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+
+def what_you_ate_menu(user: User, nutrition: Nutrition):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\033[30;43mFITNESS TRACKER\033[1;0m")
+        print("\033[34;47m> Nutrition Help\033[1;0m")
+        print("\033[34;47m>> Meal Plan\033[1;0m")
+        print("\033[34;47m>>> What You ate Today\033[1;0m\n")
+        print("1. From Meal Plan")
+        print("2. Not From Meal Plan")
+        print("0. \033[31mGo Back\033[0m\n")
+        print("--> ", end="")
+        
+        try:
+            choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            continue
+        
+        if choice == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[1;0m")
+            print("\033[34;47m> Nutrition Help\033[1;0m")
+            print("\033[34;47m>> Meal Plan\033[1;0m")
+            print("\033[34;47m>>> What You ate Today\033[1;0m")
+            print("\033[34;47m>>>> From Meal Plan\033[1;0m\n")
+            
+            front_element = nutrition.access_front_element()
+            if front_element:
+                nutrition.set_remaining_cnp(front_element)
+                nutrition.remove_from_meal_plan()
+                print("\033[32mUpdating Meal plan and Daily intake\033[0m")
+            else:
+                print("\033[31mMeal plan is empty\033[0m")
+            
+            time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\033[30;43mFITNESS TRACKER\033[0m")
+            print("\033[34;47m> Nutrition Help\033[0m")
+            print("\033[34;47m>> Meal Plan\033[0m")
+            print("\033[34;47m>>> What You ate Today\033[0m")
+            print("\033[34;47m>>>> Not From Meal Plan\033[0m\n")
+            print("Available Meals:")
+            
+            nutrition.print_meals()
+            print("\n-Enter the name of the food: ", end="")
+            
+            food_name = input()
+            nutrition.set_remaining_cnp(food_name)
+            print("\033[32mDaily intake updated\n\033[0m")
+            time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        
+        elif choice == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+
+def workout_plan_menu(user: User, workout: Workout):
     return
 
-def meal_plan_menu():
+def walking_menu(user: User, workout: Workout):
     return
 
-def what_you_ate_menu():
+def running_menu(user: User, workout: Workout):
     return
 
-def workout_plan_menu():
+def swimming_menu(user: User, workout: Workout):
     return
 
-def walking_menu():
+def cycling_menu(user: User, workout: Workout):
     return
 
-def running_menu():
+def gym_training_menu(user: User, workout: Workout):
     return
 
-def swimming_menu():
-    return
-
-def cycling_menu():
-    return
-
-def gym_training_menu():
-    return
-
-def main():
+def main(): # Huvudfunktion som startar programmet
     user = User()
     nutrition = Nutrition(user)
     workout = Workout()
     
-    # Welcome msg
+    # Welcome meddelande
     print("\033[32mWELCOME to your fitness journey!")
     print("Please enter the below information for us to help you get started!\033[0m\n")
     
@@ -363,7 +737,7 @@ def main():
     user.set_weight()
     user.calculate_bmi()
 
-    # nutrition info
+    # Näringsinformation
     nutrition.set_calorie_intake()
     nutrition.set_protein_intake()
     nutrition.set_water_intake()
@@ -371,7 +745,7 @@ def main():
 
     os.system('cls' if os.name == 'nt' else 'clear')
         
-    while True:
+    while True: # Huvudmeny
         print("\033[30;43mFITNESS TRACKER\033[1;0m\n")
         print("\033[33mChoose what you want to do:(enter the number)\033[1;0m")
         print("1. Display Profile")
@@ -391,7 +765,7 @@ def main():
             os.system('cls' if os.name == 'nt' else 'clear')
             continue
         
-        if choice == 1:
+        if choice == 1: # Visa användarprofil
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             User.display_profile()
@@ -399,16 +773,16 @@ def main():
             input()
             os.system('cls' if os.name == 'nt' else 'clear')
         
-        elif choice == 2:
+        elif choice == 2: # Uppdatera profilmeny
             update_profile_menu(user, nutrition)
         
-        elif choice == 3:
+        elif choice == 3: # Näringshjälpmeny
             nutrition_help_menu(user, nutrition)
         
-        elif choice == 4:
+        elif choice == 4: # Träningsplanmeny
             workout_plan_menu(user, workout)
         
-        elif choice == 5:
+        elif choice == 5:# Utför träning
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m>> WORKOUT EXECUTION\033[1;0m\n")
@@ -418,7 +792,7 @@ def main():
             
             workout.execute_workout_queue()
         
-        elif choice == 0:
+        elif choice == 0: # Avsluta programmet
             print("\n\033[32mTHANK YOU for using Fitness Tracker.\033[0m")
             print("\033[31mExiting...\033[0m")
             time.sleep(4)
