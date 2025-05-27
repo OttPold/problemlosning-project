@@ -13,7 +13,7 @@ from typing import List, Dict, Optional
 
 
 __author__  = "Ott Rudolf Pold"
-__version__ = "4.0.0"
+__version__ = "5.0.0"
 __email__   = "ott.pold@elev.ga.ntig.se"
 
 # innehåller allt info om användaren
@@ -319,61 +319,838 @@ class Workout: # Huvudklass för träningsfunktionalitet
 
         #Nybörjare
         self.beginner_workouts = {
-            "strength": {
+            "strength": {   # alla styrka fokuserad övningar
                 "chest": [
-                    Exercise("Traditional Push-up", "chest", 100, 3, 8)
+                    Exercise("Traditional Push-up", "chest", 100, 3, 8),
+                    Exercise("Wide Push-up", "chest", 100, 3, 8),
+                    Exercise("Narrow Push-up", "chest", 100, 3, 8),
+                    Exercise("Incline Push-up", "chest", 100, 3, 8),
+                    Exercise("Decline Push-up", "chest", 100, 3, 8)
+                ],
+                "shoulders": [
+                    Exercise("Shoulder Press", "shoulders", 90, 3, 8),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 80, 3, 8),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 3, 8),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 3, 8),
+                    Exercise("Shrugs", "shoulders", 100, 3, 8)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 100, 3, 8),
+                    Exercise("Leg Press", "legs", 120, 3, 8),
+                    Exercise("Lunges", "legs", 100, 3, 8),
+                    Exercise("Leg Extension", "legs", 90, 3, 8),
+                    Exercise("Leg Curl", "legs", 90, 3, 8),
+                    Exercise("Calf Raises", "legs", 80, 3, 8)
+                ],
+                "back": [
+                    Exercise("Assisted Pull-up", "back", 100, 3, 8),
+                    Exercise("Assisted Chin-up", "back", 100, 3, 8),
+                    Exercise("Lat Pulldown", "back", 120, 3, 8),
+                    Exercise("Seated Cable Row", "back", 110, 3, 8),
+                    Exercise("Bent-over Dumbbell Row", "back", 110, 3, 8),
+                    Exercise("Back Extension", "back", 80, 3, 8)
+                ],
+                "biceps": [
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 3, 8),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 3, 8),
+                    Exercise("Concentration Curl", "biceps", 70, 3, 8),
+                    Exercise("Preacher Curl", "biceps", 75, 3, 8),
+                    Exercise("Barbell Curl", "biceps", 85, 3, 8)
+                ],
+                "triceps": [
+                    Exercise("Tricep Dip", "triceps", 90, 3, 8),
+                    Exercise("Skull Crusher", "triceps", 90, 3, 8),
+                    Exercise("Tricep Extension", "triceps", 80, 3, 8),
+                    Exercise("Tricep Kickback", "triceps", 70, 3, 8),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 3, 8)
+                ],
+                "abs": [
+                    Exercise("Crunches", "abs", 50, 3, 8),
+                    Exercise("Russian Twist", "abs", 60, 3, 8),
+                    Exercise("Plank (30 seconds)", "abs", 80, 3, 8),
+                    Exercise("Bicycle Crunches", "abs", 70, 3, 8),
+                    Exercise("Reverse Crunch", "abs", 60, 3, 8),
+                    Exercise("Sit-ups", "abs", 60, 3, 8)
                 ]
             },
-            "volume": {
+            "volume": { # alla volym fokuserad övningar
                 "chest": [
-                    Exercise("Traditional Push-up", "chest", 100, 4, 10)
+                    Exercise("Traditional Push-up", "chest", 100, 4, 10),
+                    Exercise("Wide Push-up", "chest", 100, 4, 10),
+                    Exercise("Narrow Push-up", "chest", 100, 4, 10),
+                    Exercise("Incline Push-up", "chest", 100, 4, 10),
+                    Exercise("Decline Push-up", "chest", 100, 4, 10)
+                ],
+                "shoulders": [
+                    Exercise("Shoulder Press", "shoulders", 90, 4, 10),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 100, 4, 10),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 4, 10),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 4, 10),
+                    Exercise("Shrugs", "shoulders", 100, 4, 10)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 100, 4, 10),
+                    Exercise("Leg Press", "legs", 120, 4, 10),
+                    Exercise("Lunges", "legs", 100, 4, 10),
+                    Exercise("Leg Extension", "legs", 90, 4, 10),
+                    Exercise("Leg Curl", "legs", 90, 4, 10),
+                    Exercise("Calf Raises", "legs", 80, 4, 10)
+                ],
+                "back": [
+                    Exercise("Assisted Pull-up", "back", 100, 4, 10),
+                    Exercise("Assisted Chin-up", "back", 100, 4, 10),
+                    Exercise("Lat Pulldown", "back", 120, 4, 10),
+                    Exercise("Seated Cable Row", "back", 110, 4, 10),
+                    Exercise("Bent-over Dumbbell Row", "back", 110, 4, 10),
+                    Exercise("Back Extension", "back", 80, 4, 10)
+                ],
+                "biceps": [
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 4, 10),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 4, 10),
+                    Exercise("Concentration Curl", "biceps", 70, 4, 10),
+                    Exercise("Preacher Curl", "biceps", 75, 4, 10),
+                    Exercise("Barbell Curl", "biceps", 85, 4, 10)
+                ],
+                "triceps": [
+                    Exercise("Tricep Dip", "triceps", 90, 4, 10),
+                    Exercise("Skull Crusher", "triceps", 90, 4, 10),
+                    Exercise("Tricep Extension", "triceps", 80, 4, 10),
+                    Exercise("Tricep Kickback", "triceps", 70, 4, 10),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 4, 10)
+                ],
+                "abs": [
+                    Exercise("Crunches", "abs", 50, 4, 10),
+                    Exercise("Russian Twist", "abs", 60, 4, 10),
+                    Exercise("Plank (30 seconds)", "abs", 80, 4, 10),
+                    Exercise("Bicycle Crunches", "abs", 70, 4, 10),
+                    Exercise("Reverse Crunch", "abs", 60, 4, 10),
+                    Exercise("Sit-ups", "abs", 60, 4, 10)
                 ]
             },
-            "endurance": {
+            "endurance": { # alla uthärdande fokuserad övningar
                 "chest": [
-                    Exercise("Traditional Push-up", "chest", 110, 3, 12)
+                    Exercise("Traditional Push-up", "chest", 110, 3, 12),
+                    Exercise("Wide Push-up", "chest", 110, 3, 12),
+                    Exercise("Narrow Push-up", "chest", 110, 3, 12),
+                    Exercise("Incline Push-up", "chest", 110, 3, 12),
+                    Exercise("Decline Push-up", "chest", 110, 3, 12)
+                ],
+                "shoulders": [
+                    Exercise("Shoulder Press", "shoulders", 100, 3, 12),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 90, 3, 12),
+                    Exercise("Front Dumbbell Raise", "shoulders", 90, 3, 12),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 90, 3, 12),
+                    Exercise("Shrugs", "shoulders", 110, 3, 12)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 110, 3, 12),
+                    Exercise("Leg Press", "legs", 130, 3, 12),
+                    Exercise("Lunges", "legs", 110, 3, 12),
+                    Exercise("Leg Extension", "legs", 100, 3, 12),
+                    Exercise("Leg Curl", "legs", 100, 3, 12),
+                    Exercise("Calf Raises", "legs", 90, 3, 12)
+                ],
+                "back": [
+                    Exercise("Assisted Pull-up", "back", 110, 3, 12),
+                    Exercise("Assisted Chin-up", "back", 110, 3, 12),
+                    Exercise("Lat Pulldown", "back", 130, 3, 12),
+                    Exercise("Seated Cable Row", "back", 120, 3, 12),
+                    Exercise("Bent-over Dumbbell Row", "back", 120, 3, 12),
+                    Exercise("Back Extension", "back", 90, 3, 12)
+                ],
+                "biceps": [
+                    Exercise("Dumbbell Bicep Curl", "biceps", 90, 3, 12),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 90, 3, 12),
+                    Exercise("Concentration Curl", "biceps", 80, 3, 12),
+                    Exercise("Preacher Curl", "biceps", 85, 3, 12),
+                    Exercise("Barbell Curl", "biceps", 95, 3, 12)
+                ],
+                "triceps": [
+                    Exercise("Tricep Dip", "triceps", 100, 3, 12),
+                    Exercise("Skull Crusher", "triceps", 100, 3, 12),
+                    Exercise("Tricep Extension", "triceps", 90, 3, 12),
+                    Exercise("Tricep Kickback", "triceps", 80, 3, 12),
+                    Exercise("Cable Tricep Pushdown", "triceps", 95, 3, 12)
+                ],
+                "abs": [
+                    Exercise("Crunches", "abs", 60, 3, 12),
+                    Exercise("Russian Twist", "abs", 70, 3, 12),
+                    Exercise("Plank (30 seconds)", "abs", 90, 3, 12),
+                    Exercise("Bicycle Crunches", "abs", 80, 3, 12),
+                    Exercise("Reverse Crunch", "abs", 70, 3, 12),
+                    Exercise("Sit-ups", "abs", 70, 3, 12)
                 ]
             }
         }
 
-        #Intermediate
-        self.intermediate_workouts
+        #Mellanliggande
+        self.intermediate_workouts = {
+            "strength": {# alla styrka fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 90, 3, 8),
+                    Exercise("Incline Dumbbell Curl", "biceps", 85, 3, 8),
+                    Exercise("Spider Dumbbell Curl", "biceps", 85, 3, 8),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 90, 3, 8),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 80, 3, 8),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 85, 3, 8),
+                    Exercise("Concentration Curl", "biceps", 80, 3, 8),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 3, 8),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 3, 8)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 90, 3, 8),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 85, 3, 8),
+                    Exercise("Close-Grip Bench Press", "triceps", 95, 3, 8),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 85, 3, 8),
+                    Exercise("Tricep Dip", "triceps", 90, 3, 8),
+                    Exercise("Tricep Kickback", "triceps", 70, 3, 8),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 3, 8)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 120, 3, 8),
+                    Exercise("Barbell Incline Press", "chest", 120, 3, 8),
+                    Exercise("Barbell Decline Press", "chest", 120, 3, 8),
+                    Exercise("Dumbbell Bench Press", "chest", 120, 3, 8),
+                    Exercise("Incline Dumbbell Press", "chest", 110, 3, 8),
+                    Exercise("Decline Dumbbell Press", "chest", 115, 3, 8),
+                    Exercise("Chest Dip", "chest", 100, 3, 8),
+                    Exercise("Cable Fly", "chest", 90, 3, 8),
+                    Exercise("Chest Fly", "chest", 90, 3, 8),
+                    Exercise("Traditional Push-up", "chest", 100, 3, 8),
+                    Exercise("Wide Push-up", "chest", 100, 3, 8),
+                    Exercise("Narrow Push-up", "chest", 100, 3, 8),
+                    Exercise("Incline Push-up", "chest", 100, 3, 8),
+                    Exercise("Decline Push-up", "chest", 100, 3, 8)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 130, 3, 8),
+                    Exercise("Deadlift", "legs", 140, 3, 8),
+                    Exercise("Leg Press", "legs", 120, 3, 8),
+                    Exercise("Lunges with Dumbbells", "legs", 110, 3, 8),
+                    Exercise("Leg Curl", "legs", 100, 3, 8),
+                    Exercise("Calf Raises", "legs", 90, 3, 8),
+                    Exercise("Leg Extension", "legs", 90, 3, 8),
+                    Exercise("Goblin Squat", "legs", 90, 3, 8)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 110, 3, 8),
+                    Exercise("Close Grip Pull-Up", "back", 110, 3, 8),
+                    Exercise("Traditional Chin-Up", "back", 110, 3, 8),
+                    Exercise("Close Grip Chin-Up", "back", 110, 3, 8),
+                    Exercise("Bent-Over Barbell Row", "back", 120, 3, 8),
+                    Exercise("Deadlift", "back", 140, 3, 8),
+                    Exercise("Lat Pulldown", "back", 110, 3, 8),
+                    Exercise("Seated Cable Row", "back", 100, 3, 8),
+                    Exercise("T-Bar Row", "back", 115, 3, 8)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 100, 3, 8),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 80, 3, 8),
+                    Exercise("Seated Dumbbell Press", "shoulders", 90, 3, 8),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 3, 8),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 85, 3, 8),
+                    Exercise("Upright Row", "shoulders", 90, 3, 8),
+                    Exercise("Shoulder Press", "shoulders", 90, 3, 8),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 3, 8),
+                    Exercise("Shrugs", "shoulders", 100, 3, 8)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 80, 3, 8),
+                    Exercise("Cable Crunch", "abs", 70, 3, 8),
+                    Exercise("Plank (60 seconds)", "abs", 90, 3, 60),
+                    Exercise("Ab Roller", "abs", 70, 3, 8),
+                    Exercise("Reverse Crunch", "abs", 60, 3, 8),
+                    Exercise("Crunches", "abs", 50, 3, 8),
+                    Exercise("Russian Twist", "abs", 60, 3, 8),
+                    Exercise("Bicycle Crunches", "abs", 70, 3, 8),
+                    Exercise("Sit-ups", "abs", 60, 3, 8)
+                ]
+            },
+            "volume": {# alla volym fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 90, 4, 10),
+                    Exercise("Incline Dumbbell Curl", "biceps", 85, 4, 10),
+                    Exercise("Spider Dumbbell Curl", "biceps", 85, 4, 10),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 90, 4, 10),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 100, 4, 10),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 85, 4, 10),
+                    Exercise("Concentration Curl", "biceps", 80, 4, 10),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 4, 10),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 4, 10)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 90, 4, 10),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 85, 4, 10),
+                    Exercise("Close-Grip Bench Press", "triceps", 95, 4, 10),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 85, 4, 10),
+                    Exercise("Tricep Dip", "triceps", 90, 4, 10),
+                    Exercise("Tricep Kickback", "triceps", 70, 4, 10),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 4, 10)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 120, 4, 10),
+                    Exercise("Barbell Incline Press", "chest", 120, 4, 10),
+                    Exercise("Barbell Decline Press", "chest", 120, 4, 10),
+                    Exercise("Dumbbell Bench Press", "chest", 120, 4, 10),
+                    Exercise("Incline Dumbbell Press", "chest", 110, 4, 10),
+                    Exercise("Decline Dumbbell Press", "chest", 115, 4, 10),
+                    Exercise("Chest Dip", "chest", 100, 4, 10),
+                    Exercise("Cable Fly", "chest", 90, 4, 10),
+                    Exercise("Chest Fly", "chest", 90, 4, 10),
+                    Exercise("Traditional Push-up", "chest", 100, 4, 10),
+                    Exercise("Wide Push-up", "chest", 100, 4, 10),
+                    Exercise("Narrow Push-up", "chest", 100, 4, 10),
+                    Exercise("Incline Push-up", "chest", 100, 4, 10),
+                    Exercise("Decline Push-up", "chest", 100, 4, 10)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 140, 4, 10),
+                    Exercise("Deadlift", "legs", 140, 4, 10),
+                    Exercise("Leg Press", "legs", 120, 4, 10),
+                    Exercise("Lunges with Dumbbells", "legs", 110, 4, 10),
+                    Exercise("Leg Curl", "legs", 100, 4, 10),
+                    Exercise("Calf Raises", "legs", 90, 4, 10),
+                    Exercise("Leg Extension", "legs", 90, 4, 10),
+                    Exercise("Goblin Squat", "legs", 90, 4, 10)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 110, 4, 10),
+                    Exercise("Close Grip Pull-Up", "back", 110, 4, 10),
+                    Exercise("Traditional Chin-Up", "back", 110, 4, 10),
+                    Exercise("Close Grip Chin-Up", "back", 110, 4, 10),
+                    Exercise("Bent-Over Barbell Row", "back", 120, 4, 10),
+                    Exercise("Deadlift", "back", 140, 4, 10),
+                    Exercise("Lat Pulldown", "back", 110, 4, 10),
+                    Exercise("Seated Cable Row", "back", 100, 4, 10),
+                    Exercise("T-Bar Row", "back", 115, 4, 10)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 100, 4, 10),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 80, 4, 10),
+                    Exercise("Seated Dumbbell Press", "shoulders", 90, 4, 10),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 4, 10),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 85, 4, 10),
+                    Exercise("Upright Row", "shoulders", 90, 4, 10),
+                    Exercise("Shoulder Press", "shoulders", 90, 4, 10),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 4, 10),
+                    Exercise("Shrugs", "shoulders", 100, 4, 10)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 80, 4, 10),
+                    Exercise("Cable Crunch", "abs", 70, 4, 10),
+                    Exercise("Plank (60 seconds)", "abs", 90, 4, 60),
+                    Exercise("Ab Roller", "abs", 70, 4, 10),
+                    Exercise("Reverse Crunch", "abs", 60, 4, 10),
+                    Exercise("Crunches", "abs", 50, 4, 10),
+                    Exercise("Russian Twist", "abs", 60, 4, 10),
+                    Exercise("Bicycle Crunches", "abs", 70, 4, 10),
+                    Exercise("Sit-ups", "abs", 60, 4, 10)
+                ]
+            },
+            "endurance": {# alla uthärdande fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 100, 3, 12),
+                    Exercise("Incline Dumbbell Curl", "biceps", 95, 3, 12),
+                    Exercise("Spider Dumbbell Curl", "biceps", 95, 3, 12),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 100, 3, 12),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 90, 3, 12),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 95, 3, 12),
+                    Exercise("Concentration Curl", "biceps", 90, 3, 12),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 90, 3, 12),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 90, 3, 12)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 100, 3, 12),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 95, 3, 12),
+                    Exercise("Close-Grip Bench Press", "triceps", 95, 3, 12),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 95, 3, 12),
+                    Exercise("Tricep Dip", "triceps", 100, 3, 12),
+                    Exercise("Tricep Kickback", "triceps", 80, 3, 12),
+                    Exercise("Cable Tricep Pushdown", "triceps", 95, 3, 12)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 130, 3, 12),
+                    Exercise("Barbell Incline Press", "chest", 130, 3, 12),
+                    Exercise("Barbell Decline Press", "chest", 130, 3, 12),
+                    Exercise("Dumbbell Bench Press", "chest", 130, 3, 12),
+                    Exercise("Incline Dumbbell Press", "chest", 120, 3, 12),
+                    Exercise("Decline Dumbbell Press", "chest", 125, 3, 12),
+                    Exercise("Chest Dip", "chest", 110, 3, 12),
+                    Exercise("Cable Fly", "chest", 100, 3, 12),
+                    Exercise("Chest Fly", "chest", 100, 3, 12),
+                    Exercise("Traditional Push-up", "chest", 110, 3, 12),
+                    Exercise("Wide Push-up", "chest", 110, 3, 12),
+                    Exercise("Narrow Push-up", "chest", 110, 3, 12),
+                    Exercise("Incline Push-up", "chest", 110, 3, 12),
+                    Exercise("Decline Push-up", "chest", 110, 3, 12)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 140, 3, 12),
+                    Exercise("Deadlift", "legs", 150, 3, 12),
+                    Exercise("Leg Press", "legs", 130, 3, 12),
+                    Exercise("Lunges with Dumbbells", "legs", 120, 3, 12),
+                    Exercise("Leg Curl", "legs", 110, 3, 12),
+                    Exercise("Calf Raises", "legs", 100, 3, 12),
+                    Exercise("Leg Extension", "legs", 100, 3, 12),
+                    Exercise("Goblin Squat", "legs", 1100, 3, 12)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 120, 3, 12),
+                    Exercise("Close Grip Pull-Up", "back", 120, 3, 12),
+                    Exercise("Traditional Chin-Up", "back", 120, 3, 12),
+                    Exercise("Close Grip Chin-Up", "back", 120, 3, 12),
+                    Exercise("Bent-Over Barbell Row", "back", 130, 3, 12),
+                    Exercise("Deadlift", "back", 150, 3, 12),
+                    Exercise("Lat Pulldown", "back", 120, 3, 12),
+                    Exercise("Seated Cable Row", "back", 110, 3, 12),
+                    Exercise("T-Bar Row", "back", 115, 3, 12)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 110, 3, 12),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 90, 3, 12),
+                    Exercise("Seated Dumbbell Press", "shoulders", 100, 3, 12),
+                    Exercise("Front Dumbbell Raise", "shoulders", 90, 3, 12),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 95, 3, 12),
+                    Exercise("Upright Row", "shoulders", 100, 3, 12),
+                    Exercise("Shoulder Press", "shoulders", 100, 3, 12),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 90, 3, 12),
+                    Exercise("Shrugs", "shoulders", 110, 3, 12)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 90, 3, 12),
+                    Exercise("Cable Crunch", "abs", 80, 3, 12),
+                    Exercise("Plank (60 seconds)", "abs", 100, 3, 60),
+                    Exercise("Ab Roller", "abs", 80, 3, 12),
+                    Exercise("Reverse Crunch", "abs", 70, 3, 12),
+                    Exercise("Crunches", "abs", 60, 3, 12),
+                    Exercise("Russian Twist", "abs", 70, 3, 12),
+                    Exercise("Bicycle Crunches", "abs", 80, 3, 12),
+                    Exercise("Sit-ups", "abs", 70, 3, 12)
+                ]
+            }
+        }
 
         #Expert
-        self.advanced_workouts
+        self.advanced_workouts = {
+            "strength": {# alla styrka fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 90, 3, 8),
+                    Exercise("Incline Dumbbell Curl", "biceps", 85, 3, 8),
+                    Exercise("Spider Curl", "biceps", 85, 3, 8),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 90, 3, 8),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 80, 3, 8),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 85, 3, 8),
+                    Exercise("Concentration Curl", "biceps", 80, 3, 8),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 3, 8),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 3, 8),
+                    Exercise("Zottman Curl", "biceps", 85, 3, 8),
+                    Exercise("Cross Body Hammer Curl", "biceps", 85, 3, 8)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 100, 3, 8),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 80, 3, 8),
+                    Exercise("Seated Dumbbell Press", "shoulders", 90, 3, 8),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 3, 8),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 85, 3, 8),
+                    Exercise("Upright Row", "shoulders", 90, 3, 8),
+                    Exercise("Shoulder Press", "shoulders", 90, 3, 8),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 3, 8),
+                    Exercise("Shrugs", "shoulders", 100, 3, 8)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 90, 3, 8),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 85, 3, 8),
+                    Exercise("Close-Grip Bench Press", "triceps", 95, 3, 8),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 85, 3, 8),
+                    Exercise("Tricep Dip", "triceps", 90, 3, 8),
+                    Exercise("Tricep Kickback", "triceps", 70, 3, 8),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 3, 8),
+                    Exercise("Diamond Push-Up", "triceps", 90, 3, 8),
+                    Exercise("Triceps Extension Push-ups", "triceps", 95, 3, 8)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 120, 3, 8),
+                    Exercise("Barbell Incline Press", "chest", 120, 3, 8),
+                    Exercise("Barbell Decline Press", "chest", 120, 3, 8),
+                    Exercise("Dumbbell Bench Press", "chest", 120, 3, 8),
+                    Exercise("Incline Dumbbell Press", "chest", 110, 3, 8),
+                    Exercise("Decline Dumbbell Press", "chest", 115, 3, 8),
+                    Exercise("Chest Dip", "chest", 100, 3, 8),
+                    Exercise("Cable Fly", "chest", 90, 3, 8),
+                    Exercise("Chest Fly", "chest", 90, 3, 8),
+                    Exercise("Traditional Push-up", "chest", 100, 3, 8),
+                    Exercise("Wide Push-up", "chest", 100, 3, 8),
+                    Exercise("Narrow Push-up", "chest", 100, 3, 8),
+                    Exercise("Incline Push-up", "chest", 100, 3, 8),
+                    Exercise("Decline Push-up", "chest", 100, 3, 8),
+                    Exercise("Weighted Push-Up", "chest", 110, 3, 8),
+                    Exercise("Svend Press", "chest", 80, 3, 8)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 130, 3, 8),
+                    Exercise("Deadlift", "legs", 140, 3, 8),
+                    Exercise("Leg Press", "legs", 120, 3, 8),
+                    Exercise("Lunges with Dumbbells", "legs", 110, 3, 8),
+                    Exercise("Leg Curl", "legs", 100, 3, 8),
+                    Exercise("Calf Raises", "legs", 90, 3, 8),
+                    Exercise("Leg Extension", "legs", 90, 3, 8),
+                    Exercise("Goblin Squat", "legs", 90, 3, 8),
+                    Exercise("Front Squat", "legs", 130, 3, 8),
+                    Exercise("Bulgarian Split Squat", "legs", 110, 3, 8),
+                    Exercise("Romanian Deadlift", "legs", 140, 3, 8)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 110, 3, 8),
+                    Exercise("Close Grip Pull-Up", "back", 110, 3, 8),
+                    Exercise("Wide Grip Pull-Up", "back", 110, 3, 8),
+                    Exercise("Traditional Chin-Up", "back", 110, 3, 8),
+                    Exercise("Close Grip Chin-Up", "back", 110, 3, 8),
+                    Exercise("Wide Grip Chin-Up", "back", 110, 3, 8),
+                    Exercise("Bent-Over Barbell Row", "back", 120, 3, 8),
+                    Exercise("Deadlift", "back", 140, 3, 8),
+                    Exercise("Lat Pulldown", "back", 110, 3, 8),
+                    Exercise("Seated Cable Row", "back", 100, 3, 8),
+                    Exercise("T-Bar Row", "back", 115, 3, 8),
+                    Exercise("Weighted Pull-Up", "back", 120, 3, 8),
+                    Exercise("Weighted Close Grip Pull-Up", "back", 120, 3, 8),
+                    Exercise("Weighted Wide Grip Pull-Up", "back", 120, 3, 8),
+                    Exercise("Weighted Chin-Up", "back", 120, 3, 8),
+                    Exercise("Weighted Close Grip Chin-Up", "back", 120, 3, 8),
+                    Exercise("Weighted Wide Grip Chin-Up", "back", 120, 3, 8),
+                    Exercise("Single-Arm Dumbbell Row", "back", 110, 3, 8)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 80, 3, 8),
+                    Exercise("Cable Crunch", "abs", 70, 3, 8),
+                    Exercise("Plank (60 seconds)", "abs", 90, 3, 60),
+                    Exercise("Ab Roller", "abs", 70, 3, 8),
+                    Exercise("Reverse Crunch", "abs", 60, 3, 8),
+                    Exercise("Crunches", "abs", 50, 3, 8),
+                    Exercise("Russian Twist", "abs", 60, 3, 8),
+                    Exercise("Bicycle Crunches", "abs", 70, 3, 8),
+                    Exercise("Sit-ups", "abs", 60, 3, 8),
+                    Exercise("Weighted Plank (60 seconds)", "abs", 90, 3, 60),
+                    Exercise("Dragon Flag", "abs", 100, 3, 8)
+                ]
+            },
+            "volume": {# alla volym fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 90, 4, 10),
+                    Exercise("Incline Dumbbell Curl", "biceps", 85, 4, 10),
+                    Exercise("Spider Curl", "biceps", 85, 4, 10),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 90, 4, 10),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 80, 4, 10),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 85, 4, 10),
+                    Exercise("Concentration Curl", "biceps", 80, 4, 10),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 80, 4, 10),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 80, 4, 10),
+                    Exercise("Zottman Curl", "biceps", 85, 4, 10),
+                    Exercise("Cross Body Hammer Curl", "biceps", 85, 4, 10)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 100, 4, 10),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 80, 4, 10),
+                    Exercise("Seated Dumbbell Press", "shoulders", 90, 4, 10),
+                    Exercise("Front Dumbbell Raise", "shoulders", 80, 4, 10),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 85, 4, 10),
+                    Exercise("Upright Row", "shoulders", 90, 4, 10),
+                    Exercise("Shoulder Press", "shoulders", 90, 4, 10),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 80, 4, 10),
+                    Exercise("Shrugs", "shoulders", 100, 4, 10)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 90, 4, 10),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 85, 4, 10),
+                    Exercise("Close-Grip Bench Press", "triceps", 95, 4, 10),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 85, 4, 10),
+                    Exercise("Tricep Dip", "triceps", 90, 4, 10),
+                    Exercise("Tricep Kickback", "triceps", 70, 4, 10),
+                    Exercise("Cable Tricep Pushdown", "triceps", 85, 4, 10),
+                    Exercise("Diamond Push-Up", "triceps", 90, 4, 10),
+                    Exercise("Triceps Extension Push-ups", "triceps", 95, 4, 10)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 120, 4, 10),
+                    Exercise("Barbell Incline Press", "chest", 120, 4, 10),
+                    Exercise("Barbell Decline Press", "chest", 120, 4, 10),
+                    Exercise("Dumbbell Bench Press", "chest", 120, 4, 10),
+                    Exercise("Incline Dumbbell Press", "chest", 110, 4, 10),
+                    Exercise("Decline Dumbbell Press", "chest", 115, 4, 10),
+                    Exercise("Chest Dip", "chest", 100, 4, 10),
+                    Exercise("Cable Fly", "chest", 90, 4, 10),
+                    Exercise("Chest Fly", "chest", 90, 4, 10),
+                    Exercise("Traditional Push-up", "chest", 100, 4, 10),
+                    Exercise("Wide Push-up", "chest", 100, 4, 10),
+                    Exercise("Narrow Push-up", "chest", 100, 4, 10),
+                    Exercise("Incline Push-up", "chest", 100, 4, 10),
+                    Exercise("Decline Push-up", "chest", 100, 4, 10),
+                    Exercise("Weighted Push-Up", "chest", 110, 4, 10),
+                    Exercise("Svend Press", "chest", 80, 4, 10)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 140, 4, 10),
+                    Exercise("Deadlift", "legs", 140, 4, 10),
+                    Exercise("Leg Press", "legs", 120, 4, 10),
+                    Exercise("Lunges with Dumbbells", "legs", 110, 4, 10),
+                    Exercise("Leg Curl", "legs", 100, 4, 10),
+                    Exercise("Calf Raises", "legs", 90, 4, 10),
+                    Exercise("Leg Extension", "legs", 90, 4, 10),
+                    Exercise("Goblin Squat", "legs", 90, 4, 10),
+                    Exercise("Front Squat", "legs", 140, 4, 10),
+                    Exercise("Bulgarian Split Squat", "legs", 110, 4, 10),
+                    Exercise("Romanian Deadlift", "legs", 140, 4, 10)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 110, 4, 10),
+                    Exercise("Close Grip Pull-Up", "back", 110, 4, 10),
+                    Exercise("Wide Grip Pull-Up", "back", 110, 4, 10),
+                    Exercise("Traditional Chin-Up", "back", 110, 4, 10),
+                    Exercise("Close Grip Chin-Up", "back", 110, 4, 10),
+                    Exercise("Wide Grip Chin-Up", "back", 110, 4, 10),
+                    Exercise("Bent-Over Barbell Row", "back", 120, 4, 10),
+                    Exercise("Deadlift", "back", 140, 4, 10),
+                    Exercise("Lat Pulldown", "back", 110, 4, 10),
+                    Exercise("Seated Cable Row", "back", 100, 4, 10),
+                    Exercise("T-Bar Row", "back", 115, 4, 10),
+                    Exercise("Weighted Pull-Up", "back", 120, 4, 10),
+                    Exercise("Weighted Close Grip Pull-Up", "back", 120, 4, 10),
+                    Exercise("Weighted Wide Grip Pull-Up", "back", 120, 4, 10),
+                    Exercise("Weighted Chin-Up", "back", 120, 4, 10),
+                    Exercise("Weighted Close Grip Chin-Up", "back", 120, 4, 10),
+                    Exercise("Weighted Wide Grip Chin-Up", "back", 120, 4, 10),
+                    Exercise("Single-Arm Dumbbell Row", "back", 110, 4, 10)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 80, 4, 10),
+                    Exercise("Cable Crunch", "abs", 70, 4, 10),
+                    Exercise("Plank (60 seconds)", "abs", 90, 4, 60),
+                    Exercise("Ab Roller", "abs", 70, 4, 10),
+                    Exercise("Reverse Crunch", "abs", 60, 4, 10),
+                    Exercise("Crunches", "abs", 50, 4, 10),
+                    Exercise("Russian Twist", "abs", 60, 4, 10),
+                    Exercise("Bicycle Crunches", "abs", 70, 4, 10),
+                    Exercise("Sit-ups", "abs", 60, 4, 10),
+                    Exercise("Weighted Plank (60 seconds)", "abs", 90, 4, 60),
+                    Exercise("Dragon Flag", "abs", 100, 4, 10)
+                ]
+            },
+            "endurance": {# alla uthärdande fokuserad övningar
+                "biceps": [
+                    Exercise("Barbell Curl", "biceps", 100, 3, 12),
+                    Exercise("Incline Dumbbell Curl", "biceps", 95, 3, 12),
+                    Exercise("Spider Curl", "biceps", 95, 3, 12),
+                    Exercise("Hammer Curl with Rope (Cable)", "biceps", 100, 3, 12),
+                    Exercise("Bicep Curl with Rope (Cable)", "biceps", 90, 3, 12),
+                    Exercise("Preacher Curl (EZ-Bar)", "biceps", 85, 3, 12),
+                    Exercise("Concentration Curl", "biceps", 90, 3, 12),
+                    Exercise("Dumbbell Bicep Curl", "biceps", 90, 3, 12),
+                    Exercise("Dumbbell Hammer Curl", "biceps", 90, 3, 12),
+                    Exercise("Zottman Curl", "biceps", 95, 3, 12),
+                    Exercise("Cross Body Hammer Curl", "biceps", 95, 3, 12)
+                ],
+                "triceps": [
+                    Exercise("Skull Crusher (EZ-Bar)", "triceps", 100, 3, 12),
+                    Exercise("Overhead Tricep Extension with Dumbbell", "triceps", 95, 3, 12),
+                    Exercise("Close-Grip Bench Press", "triceps", 105, 3, 12),
+                    Exercise("Cable Overhead Tricep Extension", "triceps", 95, 3, 12),
+                    Exercise("Tricep Dip", "triceps", 100, 3, 12),
+                    Exercise("Tricep Kickback", "triceps", 80, 3, 12),
+                    Exercise("Cable Tricep Pushdown", "triceps", 95, 3, 12),
+                    Exercise("Diamond Push-Up", "triceps", 100, 3, 12),
+                    Exercise("Triceps Extension Push-ups", "triceps", 105, 3, 12)
+                ],
+                "chest": [
+                    Exercise("Barbell Bench Press", "chest", 130, 3, 12),
+                    Exercise("Barbell Incline Press", "chest", 130, 3, 12),
+                    Exercise("Barbell Decline Press", "chest", 130, 3, 12),
+                    Exercise("Dumbbell Bench Press", "chest", 130, 3, 12),
+                    Exercise("Incline Dumbbell Press", "chest", 120, 3, 12),
+                    Exercise("Decline Dumbbell Press", "chest", 125, 3, 12),
+                    Exercise("Chest Dip", "chest", 110, 3, 12),
+                    Exercise("Cable Fly", "chest", 100, 3, 12),
+                    Exercise("Chest Fly", "chest", 100, 3, 12),
+                    Exercise("Traditional Push-up", "chest", 110, 3, 12),
+                    Exercise("Wide Push-up", "chest", 110, 3, 12),
+                    Exercise("Narrow Push-up", "chest", 110, 3, 12),
+                    Exercise("Incline Push-up", "chest", 110, 3, 12),
+                    Exercise("Decline Push-up", "chest", 110, 3, 12),
+                    Exercise("Weighted Push-Up", "chest", 120, 3, 12),
+                    Exercise("Svend Press", "chest", 90, 3, 12)
+                ],
+                "shoulders": [
+                    Exercise("Overhead Barbell Press", "shoulders", 110, 3, 12),
+                    Exercise("Dumbbell Lateral Raise", "shoulders", 90, 3, 12),
+                    Exercise("Seated Dumbbell Press", "shoulders", 100, 3, 12),
+                    Exercise("Front Dumbbell Raise", "shoulders", 90, 3, 12),
+                    Exercise("Bent-Over Reverse Fly", "shoulders", 95, 3, 12),
+                    Exercise("Upright Row", "shoulders", 100, 3, 12),
+                    Exercise("Shoulder Press", "shoulders", 100, 3, 12),
+                    Exercise("Seated Bent-Over Rear Delt Raise", "shoulders", 90, 3, 12),
+                    Exercise("Shrugs", "shoulders", 110, 3, 12)
+                ],
+                "legs": [
+                    Exercise("Squat", "legs", 140, 3, 12),
+                    Exercise("Deadlift", "legs", 150, 3, 12),
+                    Exercise("Leg Press", "legs", 130, 3, 12),
+                    Exercise("Lunges with Dumbbells", "legs", 120, 3, 12),
+                    Exercise("Leg Curl", "legs", 110, 3, 12),
+                    Exercise("Calf Raises", "legs", 100, 3, 12),
+                    Exercise("Leg Extension", "legs", 100, 3, 12),
+                    Exercise("Goblin Squat", "legs", 100, 3, 12),
+                    Exercise("Front Squat", "legs", 140, 3, 12),
+                    Exercise("Bulgarian Split Squat", "legs", 120, 3, 12),
+                    Exercise("Romanian Deadlift", "legs", 150, 3, 12)
+                ],
+                "back": [
+                    Exercise("Traditional Pull-Up", "back", 120, 3, 12),
+                    Exercise("Close Grip Pull-Up", "back", 120, 3, 12),
+                    Exercise("Wide Grip Pull-Up", "back", 120, 3, 12),
+                    Exercise("Traditional Chin-Up", "back", 120, 3, 12),
+                    Exercise("Close Grip Chin-Up", "back", 120, 3, 12),
+                    Exercise("Wide Grip Chin-Up", "back", 120, 3, 12),
+                    Exercise("Bent-Over Barbell Row", "back", 130, 3, 12),
+                    Exercise("Deadlift", "back", 150, 3, 12),
+                    Exercise("Lat Pulldown", "back", 120, 3, 12),
+                    Exercise("Seated Cable Row", "back", 110, 3, 12),
+                    Exercise("T-Bar Row", "back", 125, 3, 12),
+                    Exercise("Weighted Pull-Up", "back", 130, 3, 12),
+                    Exercise("Weighted Close Grip Pull-Up", "back", 130, 3, 12),
+                    Exercise("Weighted Wide Grip Pull-Up", "back", 130, 3, 12),
+                    Exercise("Weighted Chin-Up", "back", 130, 3, 12),
+                    Exercise("Weighted Close Grip Chin-Up", "back", 130, 3, 12),
+                    Exercise("Weighted Wide Grip Chin-Up", "back", 130, 3, 12),
+                    Exercise("Single-Arm Dumbbell Row", "back", 120, 3, 12)
+                ],
+                "abs": [
+                    Exercise("Hanging Leg Raise", "abs", 90, 3, 12),
+                    Exercise("Cable Crunch", "abs", 80, 3, 12),
+                    Exercise("Ab Roller", "abs", 80, 3, 12),
+                    Exercise("Reverse Crunch", "abs", 70, 3, 12),
+                    Exercise("Crunches", "abs", 60, 3, 12),
+                    Exercise("Russian Twist", "abs", 70, 3, 12),
+                    Exercise("Bicycle Crunches", "abs", 80, 3, 12),
+                    Exercise("Sit-ups", "abs", 70, 3, 12),
+                    Exercise("Weighted Plank (60 seconds)", "abs", 100, 3, 12),
+                    Exercise("Dragon Flag", "abs", 110, 3, 12)
+                ]
+            }
+        }
 
-    def set_user_fitness_goal(): 
-        return
+    def set_user_fitness_goal(self, goal: str): # Ställer in användarens träningsmål (styrka, volym, uthållighet)
+        self.user_fitness_goal = goal
     
-    def set_user_strength_level():
-        return
+    def set_user_strength_level(self, level: str): # Ställer in användarens styrke level (Nybörjare, Mellanliggande, Expert)
+        self.user_strength_level = level
     
-    def get_exercises():
-        return
+    def get_exercises(self, fitness_goal: str, strength_level: str, muscle_group: str) -> List[Exercise]: # Fångar upp övningar baserade på konditionsmål, styrkenivå och muskelgrupp
+        exercises = []
+        
+        if strength_level == StrengthLevel.BEGINNER.value: # Väljer lämplig träningslexikon baserat på styrka
+            exercises = self.beginner_workouts.get(fitness_goal, {}).get(muscle_group, [])
+        elif strength_level == StrengthLevel.INTERMEDIATE.value:
+            exercises = self.intermediate_workouts.get(fitness_goal, {}).get(muscle_group, [])
+        elif strength_level == StrengthLevel.ADVANCED.value:
+            exercises = self.advanced_workouts.get(fitness_goal, {}).get(muscle_group, [])
+        
+        return exercises
     
-    def select_and_queue_exercises():
-        return
+    def select_and_queue_exercises(self, fitness_goal: str, strength_level: str, muscle_group: str): # Låter användaren välja övningar att lägga till i träningskön
+        available_exercises = self.get_exercises(fitness_goal, strength_level, muscle_group)
+        
+        while True: # Rensar skärmen och visa tillgängliga övningar
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"Available exercises for \033[30;101m{muscle_group}\033[0m:\n")
+            
+            for i, exercise in enumerate(available_exercises, 1): # Listar alla tillgängliga övningar
+                print(f"{i}. {exercise.name}")
+            print(f"{len(available_exercises) + 1}. \033[31mFinish selection\033[0m")
+            
+            try: # Får användarvalen
+                choice = int(input("\033[33mSelect an exercise (enter the number):\033[0m "))
+                
+                if 1 <= choice <= len(available_exercises): # Lägger till vald övning i träningskön
+                    routine = WorkoutRoutine()
+                    routine.exercises.append(available_exercises[choice - 1])
+                    self.add_gym_activity_to_queue(routine)
+                    print(f"\n\033[32m>>> {available_exercises[choice - 1].name} was added to your workout.\033[0m")
+                    time.sleep(1)
+                elif choice == len(available_exercises) + 1:
+                    break
+                else:
+                    print("\33[31mInvalid choice, please try again.\33[0m")
+                    time.sleep(3)
+            except ValueError:
+                print("\33[31mPlease enter a valid number.\33[0m")
+                time.sleep(3)
     
-    def add_gym_activity_to_queue():
-        return
+    def add_gym_activity_to_queue(self, workout: WorkoutRoutine): # Lägger till en träningsrutin i kön
+        self.workout_queue.put(workout)
     
-    def execute_workout_queue():
-        return
+    def execute_workout_queue(self): # Utför alla träningspass i kön
+        if self.workout_queue.empty():
+            print("\33[31mNo Workouts available.\33[0m")
+            time.sleep(3)
+            return
+        
+        print("\33[33mUpcoming Exercises: \33[0m") # Visar kommande övningar
+        temp_queue = queue.Queue()
+        count = 1
+        
+        while not self.workout_queue.empty(): # Skriver ut alla övningar i kö
+            routine = self.workout_queue.get()
+            for ex in routine.exercises:
+                print(f"{count}- {ex.name}")
+                count += 1
+            temp_queue.put(routine)
+        
+        # Återställer kön
+        while not temp_queue.empty():
+            self.workout_queue.put(temp_queue.get())
+        
+        while not self.workout_queue.empty(): # Utför varje övning i kö
+            current_workout = self.workout_queue.get()
+            
+            for ex in current_workout.exercises:
+                print(f"\n\33[33mNow Performing:\33[0m\n--> \033[30;101m{ex.name}\033[0m"
+                      f"\n   \33[33m-Sets: \33[0m{ex.sets}"
+                      f"\n   \33[33m-Reps: \33[0m{ex.reps}"
+                      f"\n   \33[32m(targeted muscle: {ex.muscle_group})\33[0m"
+                      f"\n>>> Press 0 to complete this exercise: ")
+                
+                key = input() # Väntar tills användaren slutför träningen
+        
+        print("\n\33[32mLightWeight Baby!\33[0m")
+        print("\n\33[32mAll Exercises Completed!\33[0m")
+        time.sleep(3)
     
-    def calculate_calories():
-        return
+    def calculate_calories(self, weight: float, duration: float, speed: float = 0) -> float: # Beräknar förbrända kalorier baserat på vikt, varaktighet och hastighet
+        return weight * duration * 0.0175 * (speed + 1)
     
-    def update_calorie_intake_non_gym():
-        return
+    def update_calorie_intake_non_gym(self, user: User, nutrition: Nutrition, duration: int, speed: float): # Uppdaterar förbrända kalorier för aktiviteter utanför gymmet
+        calories_burned = self.calculate_calories(user.weight, duration, speed)
+        nutrition.set_burned_calories(calories_burned)
     
-    def calculate_total_calories_burned_gym():
-        return
+    def calculate_total_calories_burned_gym(self) -> float: # Beräknar totala förbrända kalorier i gympass
+        total_calories = 0.0
+        temp_queue = queue.Queue()
+        
+        while not self.workout_queue.empty(): # Summa kalorier för alla övningar i kö
+            routine = self.workout_queue.get()
+            for ex in routine.exercises:
+                total_calories += ex.calories_burn * ex.sets
+            temp_queue.put(routine)
+        
+        # Återställer kön
+        while not temp_queue.empty():
+            self.workout_queue.put(temp_queue.get())
+        
+        return total_calories
     
 
 
-def update_profile_menu(user: User, nutrition: Nutrition):
+def update_profile_menu(user: User, nutrition: Nutrition): # Meny för att uppdatera användarprofilinformation
 
-    while True:
+    while True: # Rensar skärmen och visar meny
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\033[30;43mFITNESS TRACKER\033[1;0m")
         print("\033[34;47m> Update Profile\033[1;0m\n")
@@ -394,37 +1171,37 @@ def update_profile_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             continue
         
-        if choice == 1:
+        if choice == 1: # Uppdatera namn
             print("Enter your name: ", end="")
             user.update_name()
             print("\033[32mName Successfully Updated!\033[0m")
             time.sleep(1)
         
-        elif choice == 2:
+        elif choice == 2: # Uppdatera vikt
             print("Enter your Weight \033[33m(Kg)\033[0m: ", end="")
             user.update_weight()
             print("\033[32mWeight Successfully Updated!\033[0m")
             time.sleep(1)
         
-        elif choice == 3:
+        elif choice == 3: # Uppdatera längd
             print("Enter your Height \033[33m(meters)\033[0m: ", end="")
             user.update_height()
             print("\033[32mHeight Successfully Updated!\033[0m")
             time.sleep(1)
         
-        elif choice == 4:
+        elif choice == 4: # Uppdatera ålder
             print("Enter Your Age: ", end="")
             user.update_age()
             print("\033[32mAge Successfully Updated!\033[0m")
             time.sleep(1)
         
-        elif choice == 5:
+        elif choice == 5: # Uppdatera kön
             print("Enter Your Gender \033[33m(male/female)\033[0m: ", end="")
             user.update_gender()
             print("\033[32mGender Successfully Updated!\033[0m")
             time.sleep(1)
         
-        elif choice == 0:
+        elif choice == 0:  # Gå tillbaka
             os.system('cls' if os.name == 'nt' else 'clear')
             break
         
@@ -433,8 +1210,8 @@ def update_profile_menu(user: User, nutrition: Nutrition):
             print("\033[31mPlease Try Again\033[1;0m")
             time.sleep(2)
 
-def nutrition_help_menu(user: User, nutrition: Nutrition):
-    while True:
+def nutrition_help_menu(user: User, nutrition: Nutrition): # Meny för kosthjälp
+    while True: # Rensar skärmen och visar meny
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\033[30;43mFITNESS TRACKER\033[1;0m")
         print("\033[34;47m> Nutrition Help\033[1;0m\n")
@@ -455,7 +1232,7 @@ def nutrition_help_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             continue
         
-        if choice == 1:
+        if choice == 1: # Val att visa kaloriintag
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -464,7 +1241,7 @@ def nutrition_help_menu(user: User, nutrition: Nutrition):
             time.sleep(3)
             os.system('cls' if os.name == 'nt' else 'clear')
         
-        elif choice == 2:
+        elif choice == 2: # Val att visa proteinintag
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -473,7 +1250,7 @@ def nutrition_help_menu(user: User, nutrition: Nutrition):
             time.sleep(3)
             os.system('cls' if os.name == 'nt' else 'clear')
         
-        elif choice == 3:
+        elif choice == 3: # Val att visa sovtimmar, och rekommenderad timar att sova
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -506,10 +1283,10 @@ def nutrition_help_menu(user: User, nutrition: Nutrition):
             time.sleep(5)
             os.system('cls' if os.name == 'nt' else 'clear')
         
-        elif choice == 4:
+        elif choice == 4: # Val att visa måltidsplan
             meal_plan_menu(user, nutrition)
         
-        elif choice == 5:
+        elif choice == 5: # Val att sätta ny dag.
             print("\33[31mWarning! The meal plan will be deleted and set empty!!")
             print("Are you sure you want to continue? \33[33m(y/n) \33[0m", end="")
             
@@ -529,8 +1306,8 @@ def nutrition_help_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
 
-def meal_plan_menu(user: User, nutrition: Nutrition):
-    while True:
+def meal_plan_menu(user: User, nutrition: Nutrition):# Meny för måltidsplan
+    while True: # Rensar skärmen och visar meny
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\033[30;43mFITNESS TRACKER\033[1;0m")
         print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -552,7 +1329,7 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             continue
         
-        if choice == 1:
+        if choice == 1: # Val att visa alla tillgängliga måltider
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -567,7 +1344,7 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
                 except ValueError:
                     continue
         
-        elif choice == 2:
+        elif choice == 2:# Val att lägga till måltid i systemet
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -582,7 +1359,7 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
             print("Added")
             time.sleep(1)
         
-        elif choice == 3:
+        elif choice == 3: # Val att skapa en måltidsplan
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -606,7 +1383,7 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
                 except ValueError:
                     continue
         
-        elif choice == 4:
+        elif choice == 4: # Val att visa måltids plan för dagen
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -622,7 +1399,7 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
                 except ValueError:
                     continue
         
-        elif choice == 5:
+        elif choice == 5: # Val att ange vad du åt
             what_you_ate_menu(user, nutrition)
         
         elif choice == 0:
@@ -635,8 +1412,8 @@ def meal_plan_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
 
-def what_you_ate_menu(user: User, nutrition: Nutrition):
-    while True:
+def what_you_ate_menu(user: User, nutrition: Nutrition): # Meny för vad du åt
+    while True: # Rensar skärmen och visar meny
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\033[30;43mFITNESS TRACKER\033[1;0m")
         print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -655,7 +1432,7 @@ def what_you_ate_menu(user: User, nutrition: Nutrition):
             time.sleep(2)
             continue
         
-        if choice == 1:
+        if choice == 1: # Val at visa vad du åt från måltidsplanen
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[1;0m")
             print("\033[34;47m> Nutrition Help\033[1;0m")
@@ -674,7 +1451,7 @@ def what_you_ate_menu(user: User, nutrition: Nutrition):
             time.sleep(1)
             os.system('cls' if os.name == 'nt' else 'clear')
         
-        elif choice == 2:
+        elif choice == 2: # Val at visa vad du åt utanför måltidsplanen
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\033[30;43mFITNESS TRACKER\033[0m")
             print("\033[34;47m> Nutrition Help\033[0m")
@@ -703,22 +1480,219 @@ def what_you_ate_menu(user: User, nutrition: Nutrition):
             os.system('cls' if os.name == 'nt' else 'clear')
 
 def workout_plan_menu(user: User, workout: Workout):
-    return
+    while True: # Rensar skärmen och visar meny
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("\033[30;43mFITNESS TRACKER\033[1;0m")
+        print("\033[34;47m> WORKOUT\033[1;0m\n")
+        print("\033[33mSelect your activity:\033[1;0m")
+        print("1. Walking")
+        print("2. Running")
+        print("3. Swimming")
+        print("4. Cycling")
+        print("5. Gym Training")
+        print("0. \033[31mGo Back\033[0m\n")
+        print("--> ", end="")
+        
+        try:
+            activity_choice = int(input())
+        except ValueError:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
+            continue
+        
+        if activity_choice == 1: # Val att välja vandrande aktivitet menyn
+            walking_menu(user, workout)
+        
+        elif activity_choice == 2: # Val att välja springande aktivitet menyn
+            running_menu(user, workout)
+        
+        elif activity_choice == 3: # Val att välja simning aktivitet menyn
+            swimming_menu(user, workout)
+        
+        elif activity_choice == 4: # Val att välja cykling aktivitet menyn
+            cycling_menu(user, workout)
+        
+        elif activity_choice == 5: # Val att välja gymträning aktivitet menyn
+            gym_training_menu(user, workout)
+        
+        elif activity_choice == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("\033[31mX Invalid choice X\033[1;0m")
+            print("\033[31mPlease Try Again\033[1;0m")
+            time.sleep(2)
 
-def walking_menu(user: User, workout: Workout):
-    return
+def walking_menu(user: User, workout: Workout): # Vandrande aktivitet menyn
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m")
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> WALKING\033[1;0m\n")
+    
+    duration = int(input("-Enter the duration of the activity in minutes: "))
+    speed = float(input("-Enter your average speed (km/h): "))
+    
+    calories = workout.calculate_calories(user.weight, duration, speed) # Beräknar förbrända kalorier
+    print(f"\n\033[32m>>> Estimated calories burned: {calories:.2f} calories.\033[0m")
+    
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def running_menu(user: User, workout: Workout):
-    return
+def running_menu(user: User, workout: Workout): # Springande aktivitet menyn
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m")
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> RUNNING\033[1;0m\n")
+    
+    duration = int(input("-Enter the duration of the activity in minutes: "))
+    speed = float(input("-Enter your average speed (km/h): "))
+    
+    calories = workout.calculate_calories(user.weight, duration, speed) # Beräknar förbrända kalorier
+    print(f"\n\033[32m>>> Estimated calories burned: {calories:.2f} calories.\033[0m")
+    
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def swimming_menu(user: User, workout: Workout):
-    return
+def swimming_menu(user: User, workout: Workout): # Simning aktivitet menyn
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m")
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> SWIMMING\033[1;0m\n")
+    
+    duration = int(input("-Enter the duration of the activity in minutes: "))
+    speed = float(input("-Enter your average speed (km/h): "))
+    
+    calories = workout.calculate_calories(user.weight, duration, speed)
+    print(f"\n\033[32m>>> Estimated calories burned: {calories:.2f} calories.\033[0m")
+    
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def cycling_menu(user: User, workout: Workout):
-    return
+def cycling_menu(user: User, workout: Workout): # Cykling aktivitet menyn
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m")
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> CYCLING\033[1;0m\n")
+    
+    duration = int(input("-Enter the duration of the activity in minutes: "))
+    speed = float(input("-Enter your average speed (km/h): "))
+    
+    calories = workout.calculate_calories(user.weight, duration, speed) # Beräknar förbrända kalorier
+    print(f"\n\033[32m>>> Estimated calories burned: {calories:.2f} calories.\033[0m")
+    
+    time.sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def gym_training_menu(user: User, workout: Workout):
-    return
+def gym_training_menu(user: User, workout: Workout): # Gymträning aktivitet menyn
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m")
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> GYM TRAINING\033[1;0m")
+    print("\033[34;47m>>> FITNESS GOAL\033[1;0m\n")
+    print("\033[33mEnter your fitness goal:\033[1;0m")
+    print("1. Strength")
+    print("2. Volume")
+    print("3. Endurance\n")
+    print("--> ", end="")
+    
+    try:
+        fitness_goal_choice = int(input())
+    except ValueError:
+        fitness_goal_choice = 0
+    
+    if fitness_goal_choice == 1: # Val att välja vilken träningsmål man vill ha
+        fitness_goal = "strength"
+    elif fitness_goal_choice == 2:
+        fitness_goal = "volume"
+    elif fitness_goal_choice == 3:
+        fitness_goal = "endurance"
+    else:
+        print("\033[31mX Invalid choice X\033[1;0m")
+        print("\033[31mAutomatically Set to Default \"STRENGTH\"\033[1;0m")
+        fitness_goal = "strength"
+        time.sleep(2)
+    
+    workout.set_user_fitness_goal(fitness_goal)
+    
+    os.system('cls' if os.name == 'nt' else 'clear')# Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m") 
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> GYM TRAINING\033[1;0m")
+    print("\033[34;47m>>> STRENGTH LEVEL\033[1;0m\n")
+    print("\033[33mEnter your strength level:\033[1;0m")
+    print("1. Beginner")
+    print("2. Intermediate")
+    print("3. Advanced\n")
+    print("--> ", end="")
+    
+    try:
+        strength_level_choice = int(input())
+    except ValueError:
+        strength_level_choice = 0
+    
+    if strength_level_choice == 1: # Val att välja vilken träningsnivå man vill ha
+        strength_level = "beginner"
+    elif strength_level_choice == 2:
+        strength_level = "intermediate"
+    elif strength_level_choice == 3:
+        strength_level = "advanced"
+    else:
+        print("\033[31mX Invalid choice X\033[1;0m")
+        print("\033[31mAutomatically Set to Default \"BEGINNER\"\033[1;0m")
+        strength_level = "beginner"
+        time.sleep(2)
+    
+    workout.set_user_strength_level(strength_level)
+    
+    os.system('cls' if os.name == 'nt' else 'clear') # Rensar skärmen och visar meny
+    print("\033[30;43mFITNESS TRACKER\033[1;0m") 
+    print("\033[34;47m> WORKOUT\033[1;0m")
+    print("\033[34;47m>> GYM TRAINING\033[1;0m")
+    print("\033[34;47m>>> MUSCLE GROUP\033[1;0m\n")
+    print("\033[33mSelect muscle group to train:\033[1;0m")
+    print("1. Biceps")
+    print("2. Triceps")
+    print("3. Shoulders")
+    print("4. Back")
+    print("5. Legs")
+    print("6. Abs")
+    print("7. Chest")
+    print("0. \033[31mGo Back\033[0m\n")
+    print("--> ", end="")
+     
+    try: # Val för vilken muskelgrupp man vill träna
+        muscle_choice = int(input())
+    except ValueError:
+        muscle_choice = 0
+    
+    muscle_group = ""
+    if muscle_choice == 1:
+        muscle_group = "biceps"
+    elif muscle_choice == 2:
+        muscle_group = "triceps"
+    elif muscle_choice == 3:
+        muscle_group = "shoulders"
+    elif muscle_choice == 4:
+        muscle_group = "back"
+    elif muscle_choice == 5:
+        muscle_group = "legs"
+    elif muscle_choice == 6:
+        muscle_group = "abs"
+    elif muscle_choice == 7:
+        muscle_group = "chest"
+    elif muscle_choice == 0:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return
+    else:
+        print("\033[31mX Invalid choice X\033[1;0m")
+        print("\033[31mGoing For Biceps\033[1;0m")
+        time.sleep(2)
+        muscle_group = "biceps"
+    
+    os.system('cls' if os.name == 'nt' else 'clear')
+    workout.select_and_queue_exercises(fitness_goal, strength_level, muscle_group)
 
 def main(): # Huvudfunktion som startar programmet
     user = User()
